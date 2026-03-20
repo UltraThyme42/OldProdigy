@@ -6,17 +6,17 @@ If you're playing my Old Prodigy versions, Definitive Editions, Ultimate Edition
 
 # Credits
 
-Game restorers: Daboss7173 https://github.com/Daboss7173, Ao28th28, Craftersshaft https://github.com/craftersshaft/, etc
+Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
-Siteforkers: Ao28th28, Slappygig/Toonigy, etc  https://github.com/Ao28th28 https://github.com/slappygig https://github.com/Toonigy
+Siteforkers: UltraThyme42, Slappygig/Toonigy, etc  https://github.com/Ao28th28thedev https://github.com/slappygig https://github.com/Toonigy
 
-Old Prodigy Modifiers: Slappygig, Ao28th28 a.k.a HealingMunch, Cookie, Daboss7173, and more https://github.com/CookieTheDeveloper
+Old Prodigy Modifiers: Slappygig, UltraThyme42, Cookie, Daboss7173, and more https://github.com/CookieTheDeveloper
 
 Reborn Maker: Craftersshaft https://github.com/craftersshaft/
 
 Prodigy Game Makers: Prodigy Education a.k.a Prodigy Game (co-founded by Alex/Alexander Peters and Rohan Mahimker)
 
-Mod Makers: Daboss7173, Slappygig/Toonigy, Ao28th28, etc
+Mod Makers: Daboss7173, Slappygig/Toonigy, UltraThyme42, etc
 
 Yandere Ai Girlfriend (Eddie) maker: Anthropic
 
@@ -25,7 +25,7 @@ Song Editors: Prodigy Education a.k.a Prodigy Game
 Font Makers: Prodigy Education and more
 Playtesters: Daboss7173, Ao28th28, Mr. Inquiry, and more
 Pictures: Prodigy Education, the mustache creator, and more
-Introducers: Ao28th28, Mr. Inquiry, and more
+Introducers: UltraThyme42, Mr. Inquiry, and more
 Original Prodigy Makers: Rohan Mahimker/Alexander Peters
    
 # Old Prodigy
@@ -67,7 +67,7 @@ If there's a bug in this repository, click on the Send Feedback button in the Ol
 There are also various forks of this repository, you can check them out if you get the chance. I can not guarentee the quality of play
 as much as I can here, but I can say they have some cool stuff you might like.
 
-https://github.com/Ao28th28/Ao28th28.github.io/network/members
+https://github.com/Ao28th28thedev/Ao28th28thedev/network/members
 
 ## How to play
 
@@ -233,4 +233,4 @@ Lets scratch the surface shall we?
   
 Yep, you heard that right, that's just scratching the surface. There are lots of versions to choose from and modpacks are supported for some of them, so you can probably imagine what months of hard work can do to something like that. 
 
-https://ao28th28.github.io/oldprodigy/choose/ You can choose any version you want.
+https://ao28th28thedev.github.io/Ao28th28thedev/oldprodigy/choose/ You can choose any version you want.
