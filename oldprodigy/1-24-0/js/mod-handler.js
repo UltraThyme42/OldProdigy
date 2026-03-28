@@ -123,14 +123,11 @@ class ModHandler {
 			a = Phaser.Tween.prototype.delay,
 			s = Phaser.Tween.prototype.to,
 			r = (Boot.prototype.update, Phaser.AnimationManager.prototype.play),
-			o = Prodigy.TweenController.prototype.set,
 			n = Phaser.AnimationManager.prototype.add,
 			l = Phaser.Game.prototype.update,
-			d = this.animations,
-			h = this.tweens;
+			d = this.animations;
 		Phaser.Game.prototype.update = function(e) {
 			for (let e = 0; e < d.animations.length; e++) !Util.isDefined(d.animations[e].animation._parent) && d.animations.splice(e, 1);
-			for (let e = 0, t = h.getAll(); e < t.length; e++) !t[e]._parent.src.alive && t.splice(e, 1);
 			return l.call(this, e)
 		}, window.setGameSpeed = function(l) {
 			var g = l;
@@ -151,18 +148,10 @@ class ModHandler {
 						return d.register(o, r), o
 					}, Phaser.AnimationManager.prototype.play = function(e, t, i, a) {
 						return Util.isDefined(t) && !isNaN(t) && (t *= g), r.call(this, e, t, i, a)
-					}, Prodigy.TweenController.prototype.set = function(e, t, i, a) {
-						let s = i,
-							r = a;
-						Util.isDefined(i) && (i /= g), Util.isDefined(a) && (a /= g);
-						let n = o.call(this, e, t, i, a);
-						return h.register(this, this.tweens[this.tweens.length - 1], s, r), n
 					}, Util.isDefined(t.tweens))
 					for (var c = t.tweens.getAll(), p = 0; p < c.length; p++) c[p].timeScale = g;
 				if (Util.isDefined(d))
 					for (var u = d.getAll(), m = 0; m < u.length; m++) u[m].speed = g * (Util.isDefined(d.animations[m].baseSpeed) ? d.animations[m].baseSpeed : 10);
-				if (Util.isDefined(h))
-					for (var f = h.getAll(), y = 0, v = h.getTweens(); y < f.length; y++) v[y].delay = f[y].baseDelay / g, v[y].duration = v[y].frames.length * f[y].baseDelay * f[y].baseDuration / g
 			}
 		}, window.setGameSpeed(3), setTimeout((() => {
 			this.info('Use "setGameSpeed(speed)" to change the game speed at anytime.')
