@@ -105,7 +105,9 @@
             // Check if mods are selected
             const walkSpeedChecked = document.getElementById("walkSpeedMod").checked;
             const fastGameSpeedChecked = document.getElementById("fastGameSpeedMod").checked;
-
+            const classicFacesChecked = document.getElementById("classicFacesMod").checked;
+            const imitationTitanChecked = document.getElementById("imitationTitanMod").checked;
+            
             const selectedMods = [];
             if (walkSpeedChecked) {
                 selectedMods.push("WalkSpeed");
@@ -113,7 +115,13 @@
             if (fastGameSpeedChecked) {
                 selectedMods.push("FastGameSpeed");
             }
-
+            if (classicFacesChecked) {
+                selectedMods.push("ClassicFaces");
+            }
+            if (imitationTitanChecked) {
+                selectedMods.push("ImitationTitan");
+            }
+            
             let modsParam = "";
             // If any mods are selected, create the '?mods=Mod1,Mod2' parameter
             if (selectedMods.length > 0) {
