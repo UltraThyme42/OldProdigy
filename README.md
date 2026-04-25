@@ -1,4 +1,4 @@
-# UNBAN OLIVIA!
+# Old Prodigy
 
 Revolt Server: https://rvlt.gg/YW9wGRpd
 
