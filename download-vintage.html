@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Prodigy Vintage - Old Prodigy Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #fcd34d;
+            --bg-dark: #111827;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+        }
+        .retro-shadow {
+            text-shadow: 2px 2px 0 #000000, 4px 4px 0 var(--primary-color);
+        }
+        .card-glass {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .download-btn {
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 0 #b45309;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #b45309;
+        }
+        .download-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #b45309;
+        }
+    </style>
+</head>
+<body class="text-gray-50 min-h-screen flex flex-col">
+
+    <nav class="p-6">
+        <a href="index.html" class="text-indigo-400 hover:text-indigo-300 flex items-center gap-2 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back to Hub
+        </a>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="max-w-2xl w-full card-glass p-8 md:p-12 rounded-3xl shadow-2xl border-2 border-indigo-500/30 text-center">
+            
+            <div class="mb-8">
+                <div class="inline-block p-4 bg-amber-500/10 rounded-2xl border border-amber-500/50 mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black text-amber-300 retro-shadow mb-4 uppercase tracking-tight">
+                    Prodigy Vintage
+                </h1>
+                <p class="text-indigo-200 text-lg">Version 0.1.0 — The Original 2011 Installer</p>
+            </div>
+
+            <div class="bg-black/40 rounded-xl p-6 mb-8 text-left border border-white/5">
+                <h2 class="text-sm font-bold text-indigo-400 uppercase tracking-widest mb-3">System Requirements</h2>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                        Windows XP / Vista / 7 / 10 / 11
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                        Adobe Flash Player (Standalone/Included)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                        Internet Connection (For future Account Server)
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Future Account Server Placeholder -->
+            <div class="mb-10 p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20">
+                <p class="text-indigo-300 text-xs font-semibold uppercase mb-1">Coming Soon</p>
+                <p class="text-gray-400 text-sm italic">"The account server is currently in development. You can play locally for now, but cloud saving will be added in a future update."</p>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <a href="#" class="download-btn bg-amber-600 hover:bg-amber-500 text-white font-bold py-5 px-10 rounded-2xl text-2xl shadow-xl flex items-center justify-center gap-3">
+                    Download Installer (.exe)
+                </a>
+                <p class="text-gray-500 text-xs mt-2">File size: ~45MB | Secure download from fan archive</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="p-8 text-center text-gray-600 text-xs">
+        <p>© 2011 SMARTeacher Inc. / Fan preservation project.</p>
+    </footer>
+
+</body>
+</html>
