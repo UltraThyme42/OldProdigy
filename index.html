@@ -12,6 +12,7 @@
             --secondary-color: #fcd34d; /* Amber-300 */
             --bg-dark: #1f2937; /* Gray-800 */
             --text-light: #f9fafb; /* Gray-50 */
+            --download-glow: #fbbf24; /* Amber-400 */
         }
         .retro-shadow {
             text-shadow: 2px 2px 0 #000000, 4px 4px 0 var(--primary-color);
@@ -29,7 +30,15 @@
             box-shadow: 0 2px 0 var(--primary-color);
             transform: translateY(4px);
         }
-        /* Using Inter font as required, styled with Tailwind classes */
+        /* Special glow for the 2011 Download button */
+        .download-btn {
+            box-shadow: 0 6px 0 #b45309, 0 0 15px rgba(251, 191, 36, 0.4);
+            border: 2px solid var(--secondary-color);
+        }
+        .download-btn:hover {
+            box-shadow: 0 8px 0 #b45309, 0 0 25px rgba(251, 191, 36, 0.6);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -54,6 +63,13 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- LINKED TO THE DEDICATED DOWNLOAD PAGE -->
+            <a href="download-vintage.html" class="button-style download-btn bg-amber-600 hover:bg-amber-500 text-white font-black py-4 px-6 rounded-lg text-lg text-center flex flex-col items-center justify-center col-span-1 md:col-span-2 lg:col-span-3 border-2 border-amber-300">
+                <span class="text-xs uppercase tracking-widest opacity-80 mb-1">Legacy Installer</span>
+                <span class="text-2xl">Download Prodigy Vintage (2011)</span>
+                <span class="text-xs mt-1 font-normal opacity-75">v0.1.0 Early Access / SMARTeacher Era</span>
+            </a>
 
             <a href="https://ao28th28thedev.github.io/Website-Tester/" target="_blank" class="button-style bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-4 px-6 rounded-lg text-lg text-center shadow-lg transition duration-150 ease-in-out">
                 Old Prodigy Test Program
