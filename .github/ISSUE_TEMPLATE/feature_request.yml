@@ -7,7 +7,7 @@ body:
     attributes:
       label: What would you like to add?
       description: Here you can go into detail about what you want to add. Try to be as specific as you can so that I can tell what it is you want to change. (Stop asking me to add new versions that I can't fix, I'll do that in my own time. No asking for apis (game servers like multiplayer mode) or any oauths yet.) If you're gonna ask for bots, you can provide a picture of a bot's player card here, in the comment section or on Instagram with a link.
-      placeholder: Make a wizard do the dab because it's so trendy and would never be outdated ever. Don't ask for Discord. You can make a Reddit Community instead.
+      placeholder: Make a wizard do the dab because it's so trendy and would never be outdated ever. 
     validations:
       required: true
   - type: textarea
