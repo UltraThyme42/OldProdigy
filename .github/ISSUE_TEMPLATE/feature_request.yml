@@ -54,5 +54,5 @@ body:
           required: true
         - label: By checking this box, I confirm that this issue isn't about adding modified versions of later than 2017 or earlier than March 2015's Prodigy versions.
           required: true
-        - label: By checking this box, I confirm that I'm asking for something for only my site (https://ao28th28.github.io).
+        - label: By checking this box, I confirm that I'm asking for something for only my site (https://ao28th28thedev.github.io/Ao28th28thedev).
           required: true
