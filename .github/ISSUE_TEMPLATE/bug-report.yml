@@ -40,7 +40,7 @@ body:
     attributes:
       label: Confirmation
       options:
-        - label: I confirm that this bug report is for a bug occurring on "healingmunch.github.io/XPMUser.github.io" and NOT on other websites.
+        - label: I confirm that this bug report is for a bug occurring on "ao28th28thedev.github.io/Ao28th28thedev" and NOT on other websites.
           required: true
         - label: This report is about a problem with an existing feature, not a feature request.
           required: true
