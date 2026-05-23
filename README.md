@@ -1,4 +1,4 @@
-# UNBAN GACHAGURL2006! RE-ENABLE HER ACCOUNT!
+# Old Prodigy
 
 Revolt Server: https://rvlt.gg/YW9wGRpd
 
