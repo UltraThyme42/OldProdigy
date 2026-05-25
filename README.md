@@ -1,4 +1,4 @@
-# Old Prodigy
+# NORMAD IS A HUGE CRYBABY!
 
 Revolt Server: https://rvlt.gg/YW9wGRpd
 
