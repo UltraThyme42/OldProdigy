@@ -8,7 +8,7 @@ If you're playing my Old Prodigy versions, Definitive Editions, Ultimate Edition
 
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
-Siteforkers: UltraThyme42, Slappygig/Toonigy, etc  https://github.com/Ao28th28thedev https://github.com/slappygig https://github.com/Toonigy
+Siteforkers: UltraThyme42, Slappygig/Toonigy, etc  https://github.com/UltraThyme42 https://github.com/slappygig https://github.com/Toonigy
 
 Old Prodigy Modifiers: Slappygig, UltraThyme42, Cookie, Daboss7173, and more https://github.com/CookieTheDeveloper
 
