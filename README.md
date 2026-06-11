@@ -1,9 +1,3 @@
-# GIVE ME MERCY
-
-Revolt Server: https://rvlt.gg/YW9wGRpd
-
-If you're playing my Old Prodigy versions, Definitive Editions, Ultimate Editions, ProdigyPlus versions or Prodidows versions, and you experience bugs, or want a new feature added, but you're under 13, ask your parents to report bugs in the bug report template or to ask for anything in the feature request template.
-
 # Credits
 
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
