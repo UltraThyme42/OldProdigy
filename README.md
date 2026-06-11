@@ -1,4 +1,4 @@
-# Old Prodigy
+# GIVE ME MERCY
 
 Revolt Server: https://rvlt.gg/YW9wGRpd
 
