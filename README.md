@@ -16,7 +16,7 @@ Yandere Ai Girlfriend (Eddie) maker: Anthropic
 Song Makers: Jamie Christopherson and Matthew Pablo
 Song Editors: Prodigy Education a.k.a Prodigy Game
 Font Makers: Prodigy Education and more
-Playtesters: Daboss7173, Ao28th28, Mr. Inquiry, and more
+Playtesters: Daboss7173, UltraThyme42, Mr. Inquiry, and more
 Pictures: Prodigy Education, the mustache creator, and more
 Introducers: UltraThyme42, Mr. Inquiry, and more
 Original Prodigy Makers: Rohan Mahimker/Alexander Peters
@@ -53,14 +53,14 @@ Credits have been given in the credits list.
 
 For more information about Prodigy, [click this link!](https://www.prodigygame.com/main-en/about-prodigy/)
 
-If there's a problem with daboss7173.github.io, oldprodigy.onrender.com, slappygig.github.io, or a fork of this repository, contact the person responsible for the fork or the site that isn't a fork, not Ao28th28. I don't recommend saving your character from Daboss7173's 1.10.0 or 1.11.0 or Slappygig's 1.10.0 or 1.11.0 due to the loss of your housedata.
+If there's a problem with daboss7173.github.io, oldprodigy.onrender.com, slappygig.github.io, or a fork of this repository, contact the person responsible for the fork or the site that isn't a fork, not UltraThyme42. I don't recommend saving your character from Daboss7173's 1.10.0 or 1.11.0 or Slappygig's 1.10.0 or 1.11.0 due to the loss of your housedata.
 
 If there's a bug in this repository, click on the Send Feedback button in the Old Prodigy Menu, go to the bug-reports channel and report any bugs. I'll try to fix it as soon as I can.
 
 There are also various forks of this repository, you can check them out if you get the chance. I can not guarentee the quality of play
 as much as I can here, but I can say they have some cool stuff you might like.
 
-https://github.com/Ao28th28thedev/Ao28th28thedev/network/members
+https://github.com/UltraThyme42/OldProdigy/network/members
 
 ## How to play
 
