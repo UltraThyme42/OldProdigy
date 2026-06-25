@@ -226,4 +226,4 @@ Lets scratch the surface shall we?
   
 Yep, you heard that right, that's just scratching the surface. There are lots of versions to choose from and modpacks are supported for some of them, so you can probably imagine what months of hard work can do to something like that. 
 
-https://ao28th28thedev.github.io/Ao28th28thedev/oldprodigy/choose/ You can choose any version you want.
+https://ultrathyme42.github.io/OldProdigy/oldprodigy/choose/ You can choose any version you want.
