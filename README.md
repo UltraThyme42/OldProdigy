@@ -104,7 +104,7 @@ Here's a list of available useful mods:
 5. ClassicFaces
 6. Coyblush
 
-WalkSpeed gives you a Walk Speed feature in settings where you can set your walk speed to anything. FastGameSpeed speeds up the game, but you can change it to other speed levels on the console tab in Developer Tools (setGameSpeed(x)), x means any number. ClassicFaces makes female wizards get the faces from earlier than March 2015. ImitationTitan gives you the Titan feature without an api. CoyBlush turns male faces into old female faces for boys and girls. Mathless disables math. 
+WalkSpeed gives you a Walk Speed feature in settings where you can set your walk speed to anything. FastGameSpeed speeds up the game, but you can change it to other speed levels on the console tab in Developer Tools (setGameSpeed(x)), x means any number. RebalancedBattles increases your hp even more higher. ClassicFaces makes female wizards get the faces from earlier than March 2015. ImitationTitan gives you the Titan feature without an api. CoyBlush turns male faces into old female faces for boys and girls. Mathless disables math. 
 
 Some mods might work or not work in some versions.
 
