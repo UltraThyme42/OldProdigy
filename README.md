@@ -1,4 +1,4 @@
-# Credits
+# FIREPRODIGY SUCKS! POCK RULES!
 Echo server: https://chat-echo.com/prodidecho
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
