@@ -24,6 +24,8 @@ Original Prodigy Makers: Rohan Mahimker/Alexander Peters
    
 # Old Prodigy
 
+Discord Server: https://discord.gg/9kRfYV3gV4
+
 Old Prodigy is for historical purposes.
 
 Craftersshaft was the first coder to restore Old Prodigy (1.30.0). Unfortunately, it turned into a broken version of 1.30.0 (Prodigy Reborn 1.0 Version 1.30.R).
