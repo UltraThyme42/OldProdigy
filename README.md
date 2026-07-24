@@ -1,5 +1,4 @@
 # Credits
-Echo server: https://chat-echo.com/ultrathyme-studios
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
 Siteforkers: UltraThyme42, Slappygig/Toonigy, etc  https://github.com/UltraThyme42 https://github.com/slappygig https://github.com/Toonigy
@@ -23,6 +22,8 @@ Introducers: UltraThyme42, Mr. Inquiry, and more
 Original Prodigy Makers: Rohan Mahimker/Alexander Peters
    
 # Old Prodigy
+
+Echo server: https://chat-echo.com/ultrathyme-studios
 
 Discord Server: https://discord.gg/9kRfYV3gV4
 
