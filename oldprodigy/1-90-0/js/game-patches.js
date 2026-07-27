@@ -418,7 +418,14 @@ class ModObj {
 		this.game.prodigy.player.registerDate = new Date(this.game.prodigy.player.data.startDate),
 		GameConstants.enableGameConstant("GameConstants.Debug.EDUCATION_ENABLED", !1),
 		GameConstants.enableGameConstant("GameConstants.Debug.AUTO_ANSWER_CORRECTLY", !0);
+	try {
+		t.doGameMods()
+		Util.log("Game patches loaded without errors", Util.PATCH)
+	} catch (e) {
+		Util.log("Error occured while applying game patch!", Util.ERROR);
+		console.error(e);
 	}
+};
 	
 	doPreloadPatch() {
 		this.game.prodigy.assets._assets["game-data"] = {
