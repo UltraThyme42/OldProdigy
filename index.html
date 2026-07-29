@@ -1,902 +1,390 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Prodigy Archive - Retro Magic Portal</title>
+    <title>Old Prodigy - Classic Gateway</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for retro/playful and fantasy feels -->
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        fantasy: ['Cinzel', 'serif'],
-                        retro: ['Fredoka', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        magic: ['Cinzel', 'serif']
                     },
-                    boxShadow: {
-                        'glow-gold': '0 0 15px rgba(234, 179, 8, 0.6)',
-                        'glow-blue': '0 0 15px rgba(59, 130, 246, 0.6)',
-                        'glow-purple': '0 0 15px rgba(168, 85, 247, 0.6)',
-                        'glow-red': '0 0 15px rgba(239, 68, 68, 0.6)',
-                        'fantasy-inner': 'inset 0 2px 10px rgba(0,0,0,0.8)',
+                    colors: {
+                        prodigy: {
+                            blue: '#1e40af',
+                            gold: '#fbbf24',
+                            purple: '#6b21a8',
+                            dark: '#0f172a',
+                            glow: '#38bdf8'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(251, 191, 36, 0.4), 0 0 30px rgba(56, 189, 248, 0.2)' },
+                            '50%': { boxShadow: '0 0 25px rgba(251, 191, 36, 0.8), 0 0 50px rgba(56, 189, 248, 0.5)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar to match retro wizard style */
+        body {
+            background: radial-gradient(circle at center, #1b1335 0%, #0a0612 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .magic-card {
+            background: rgba(30, 27, 58, 0.7);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .magic-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(107, 33, 168, 0.5);
+        }
+
+        .shine-button {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+            background-size: 200% 100%;
+            transition: all 0.3s ease;
+        }
+
+        .shine-button:hover {
+            background-position: 100% 0;
+            filter: brightness(1.1);
+        }
+
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #1e1b4b;
+            background: #0a0612;
         }
         ::-webkit-scrollbar-thumb {
-            background: #eab308;
-            border-radius: 5px;
-            border: 2px solid #1e1b4b;
+            background: #3b0764;
+            border-radius: 4px;
         }
-        .starfield {
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: starScroll 120s linear infinite;
-        }
-        @keyframes starScroll {
-            from { background-position: 0 0, 40px 60px, 130px 270px; }
-            to { background-position: 550px 1100px, 390px 760px, 130px 1470px; }
-        }
-        .retro-border {
-            border: 4px solid #c29a38;
-            box-shadow: 0 0 0 4px #452a0a, 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-        }
-        .btn-magic {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-magic:hover {
-            transform: translateY(-4px) scale(1.02);
-        }
-        .btn-magic:active {
-            transform: translateY(2px) scale(0.98);
-        }
-        .magic-sparkle {
-            position: absolute;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: flySparkle 1s ease-out forwards;
-        }
-        @keyframes flySparkle {
-            0% { transform: scale(1) translate(0,0); opacity: 1; }
-            100% { transform: scale(0) translate(var(--x), var(--y)); opacity: 0; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b21a8;
         }
     </style>
 </head>
-<body class="bg-indigo-950 text-slate-100 font-retro selection:bg-yellow-500 selection:text-indigo-950 overflow-x-hidden min-h-screen relative">
-    <!-- Starfield overlay -->
-    <div class="absolute inset-0 starfield pointer-events-none z-0"></div>
+<body class="flex flex-col justify-between min-h-screen relative font-sans">
 
-    <!-- Floating Wizard Hat Background Asset -->
-    <div class="absolute top-20 left-10 opacity-10 animate-pulse pointer-events-none z-0 hidden lg:block">
-        <svg width="200" height="200" viewBox="0 0 100 100" fill="currentColor" class="text-yellow-400">
-            <path d="M50 5 L90 85 L10 85 Z" />
-            <path d="M5 85 L95 85 L95 95 L5 95 Z" />
-            <circle cx="50" cy="45" r="5" fill="#1e1b4b" />
-        </svg>
-    </div>
-    
-    <!-- Floating Spellbook Background Asset -->
-    <div class="absolute bottom-20 right-10 opacity-10 animate-bounce pointer-events-none z-0 hidden lg:block" style="animation-duration: 6s;">
-        <svg width="180" height="180" viewBox="0 0 100 100" fill="currentColor" class="text-indigo-400">
-            <path d="M10 20 L50 30 L90 20 L90 80 L50 90 L10 80 Z" />
-            <path d="M50 30 L50 90" stroke="#1e1b4b" stroke-width="2" />
-        </svg>
-    </div>
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <!-- MAIN PORTAL WRAPPER -->
-    <div class="relative z-10 flex flex-col min-h-screen">
+    <!-- Header / Navigation -->
+    <header class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-amber-400 p-0.5 flex items-center justify-center shadow-lg shadow-purple-900/40">
+                <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                    <i class="fa-solid font-magic text-2xl text-amber-400 fa-hat-wizard"></i>
+                </div>
+            </div>
+            <div>
+                <span class="font-display font-bold text-2xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">OLD PRODIGY</span>
+                <span class="block text-xs text-purple-300 font-semibold tracking-widest uppercase">Archive Hub</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="soundToggle" onclick="toggleAudio()" class="px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 flex items-center gap-2 transition-all">
+                <i id="soundIcon" class="fa-solid fa-volume-xmark text-amber-400"></i>
+                <span id="soundText">Sound: Off</span>
+            </button>
+            <a href="https://github.com/ultrathyme42" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-amber-400 text-xl transition-colors">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Hero Section -->
+    <main class="relative z-10 flex-1 max-w-6xl mx-auto px-6 py-8 flex flex-col items-center justify-center text-center">
         
-        <!-- HEADER / NAVIGATION -->
-        <header class="w-full bg-slate-950/80 backdrop-blur-md border-b-4 border-yellow-600 px-4 py-3 sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="bg-gradient-to-tr from-yellow-500 to-amber-300 p-2.5 rounded-xl border-2 border-amber-600 shadow-glow-gold transform group-hover:rotate-12 transition-transform">
-                        <i class="fa-solid fa-wand-magic-sparkles text-indigo-950 text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl sm:text-3xl font-fantasy font-black tracking-wider bg-gradient-to-r from-yellow-400 via-amber-200 to-yellow-500 bg-clip-text text-transparent">OLD PRODIGY</h1>
-                        <p class="text-[11px] uppercase tracking-widest text-amber-400 font-semibold">Nostalgia Gateway</p>
-                    </div>
-                </a>
-                
-                <!-- Quick Synth Music Widget -->
-                <div class="flex items-center gap-3 bg-indigo-900/60 border-2 border-indigo-500/50 px-4 py-2 rounded-2xl shadow-inner">
-                    <span class="text-xs text-amber-300 font-bold uppercase tracking-wider animate-pulse hidden md:inline">Retro Wizard BGM:</span>
-                    <button id="synthPlayBtn" class="bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-indigo-950 font-bold px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-md hover:shadow-glow-gold transition-all">
-                        <i class="fa-solid fa-play" id="musicIcon"></i> <span id="musicText">Play Spell Melody</span>
-                    </button>
-                    <input type="range" id="synthVolume" min="0" max="1" step="0.1" value="0.5" class="w-16 accent-yellow-500 hidden sm:block" title="Volume">
-                </div>
-            </div>
-        </header>
+        <!-- Welcome Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-900/50 border border-purple-500/30 text-purple-200 text-sm font-medium mb-6 animate-float">
+            <i class="fa-solid fa-sparkles text-amber-400"></i>
+            <span>Relive the Classic Wizard Battles</span>
+        </div>
 
-        <!-- HERO SECTION: THE THREE MAIN REDIRECTS -->
-        <main class="flex-grow max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col gap-12">
+        <!-- Main Title -->
+        <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
+            Welcome to <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-500 drop-shadow-md">Old Prodigy</span>
+        </h1>
+        
+        <p class="text-slate-300 max-w-2xl text-base sm:text-lg mb-12 font-normal leading-relaxed">
+            Your primary gateway to legacy Prodigy Math Game builds, developer insider testing tools, and nostalgic retro environments. Choose your destination below:
+        </p>
+
+        <!-- Core Button Navigation Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-12">
             
-            <section class="text-center flex flex-col items-center gap-6">
-                <!-- Retro banner decoration -->
-                <div class="inline-flex items-center gap-2 bg-yellow-500/10 border-2 border-yellow-500/40 text-yellow-400 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase">
-                    <i class="fa-solid fa-scroll"></i> Portal Established: 2026 Retro Hub
-                </div>
+            <!-- Card 1: Version Select -->
+            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
                 
-                <h2 class="text-4xl sm:text-6xl lg:text-7xl font-fantasy font-black text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] tracking-tight leading-none">
-                    STEP BACK INTO <span class="bg-gradient-to-r from-yellow-400 to-amber-300 bg-clip-text text-transparent block sm:inline">THE ACADEMY</span>
-                </h2>
+                <div class="my-4">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Version Select</h2>
+                    <p class="text-slate-400 text-sm">Choose from a curated collection of legacy Old Prodigy game versions.</p>
+                </div>
+
+                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" 
+                   onclick="playMagicSound()"
+                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-slate-950 shine-button shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group-hover:shadow-amber-500/40">
+                    <span>Launch Select</span>
+                    <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Card 2: Old Prodigy Insider Program -->
+            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
                 
-                <p class="text-lg sm:text-xl text-indigo-200 max-w-2xl font-medium leading-relaxed drop-shadow">
-                    Relive the legendary 2014-2018 era of Prodigy Math Game. Unsheathe your wand, gather your old pets, and explore old versions, special test portals, and custom fan environments.
-                </p>
-
-                <!-- THE MAGIC THREE REDIRECT BUTTONS GRID -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mt-8">
-                    
-                    <!-- BUTTON 1: OLD PRODIGY INSIDER -->
-                    <div class="bg-slate-900/90 border-4 border-emerald-500/80 rounded-3xl p-6 shadow-2xl hover:shadow-glow-blue transition-all duration-300 relative overflow-hidden group flex flex-col justify-between">
-                        <!-- Top elemental seal decoration -->
-                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="absolute top-4 right-4 text-emerald-400/30 text-5xl font-fantasy pointer-events-none">01</div>
-                        
-                        <div>
-                            <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center border-2 border-emerald-400 shadow-md mb-6 transform group-hover:rotate-6 transition-transform">
-                                <i class="fa-solid fa-eye text-white text-3xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-fantasy font-bold text-white mb-3 text-left">Old Prodigy Insider</h3>
-                            <p class="text-emerald-200 text-sm text-left mb-6 leading-relaxed">
-                                Step into the testing chamber! View active project status logs, early leaks, and experiment with the Website-Tester engine.
-                            </p>
-                        </div>
-                        
-                        <a href="https://ultrathyme42.github.io/Website-Tester/" target="_blank" class="btn-magic w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold rounded-2xl text-center text-lg border-b-4 border-emerald-800 flex items-center justify-center gap-3 shadow-lg select-button">
-                            <span>Open Insider Tester</span>
-                            <i class="fa-solid fa-circle-arrow-right"></i>
-                        </a>
+                <div class="my-4">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-flask-vial"></i>
                     </div>
-
-                    <!-- BUTTON 2: PLAY VERSIONS (THE CORE) -->
-                    <div class="bg-slate-900/90 border-4 border-yellow-500 rounded-3xl p-6 shadow-2xl hover:shadow-glow-gold transition-all duration-300 relative overflow-hidden group flex flex-col justify-between scale-100 lg:scale-105 border-double">
-                        <!-- Flash animation / golden seal -->
-                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-500/20 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="absolute top-4 right-4 text-yellow-500/30 text-5xl font-fantasy pointer-events-none">02</div>
-                        <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-yellow-500 text-indigo-950 px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest border border-amber-600">MOST POPULAR</div>
-                        
-                        <div class="mt-2">
-                            <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center border-2 border-yellow-400 shadow-glow-gold mb-6 transform group-hover:-rotate-6 transition-transform">
-                                <i class="fa-solid fa-gamepad text-indigo-950 text-3xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-fantasy font-bold text-yellow-400 mb-3 text-left">Classic Versions</h3>
-                            <p class="text-amber-100 text-sm text-left mb-6 leading-relaxed">
-                                Launch retro clients instantly. Choose from legendary builds including ancient Lamplight Town, old battle interfaces, and original math scripts!
-                            </p>
-                        </div>
-                        
-                        <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" target="_blank" class="btn-magic w-full py-4 px-6 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-indigo-950 font-black rounded-2xl text-center text-xl border-b-4 border-yellow-800 flex items-center justify-center gap-3 shadow-lg shadow-glow-gold select-button">
-                            <span>Launch Client Selector</span>
-                            <i class="fa-solid fa-play"></i>
-                        </a>
-                    </div>
-
-                    <!-- BUTTON 3: PRODIDOWS -->
-                    <div class="bg-slate-900/90 border-4 border-purple-500 rounded-3xl p-6 shadow-2xl hover:shadow-glow-purple transition-all duration-300 relative overflow-hidden group flex flex-col justify-between">
-                        <!-- Elemental seal decoration -->
-                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-purple-500/10 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="absolute top-4 right-4 text-purple-400/30 text-5xl font-fantasy pointer-events-none">03</div>
-                        
-                        <div>
-                            <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl flex items-center justify-center border-2 border-purple-400 shadow-md mb-6 transform group-hover:rotate-12 transition-transform">
-                                <i class="fa-solid fa-desktop text-white text-3xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-fantasy font-bold text-white mb-3 text-left">Prodidows OS</h3>
-                            <p class="text-purple-200 text-sm text-left mb-6 leading-relaxed">
-                                Boot into the ultimate wizard desktop experience. Browse files, configure nostalgic accounts, and load magical utilities designed just for Prodigy fans.
-                            </p>
-                        </div>
-                        
-                        <a href="https://ultrathyme42.github.io/prodidows/" target="_blank" class="btn-magic w-full py-4 px-6 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-bold rounded-2xl text-center text-lg border-b-4 border-purple-800 flex items-center justify-center gap-3 shadow-lg select-button">
-                            <span>Boot Prodidows OS</span>
-                            <i class="fa-solid fa-power-off"></i>
-                        </a>
-                    </div>
-
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Insider Program</h2>
+                    <p class="text-slate-400 text-sm">Test new features, access experimental tools, and preview web builds.</p>
                 </div>
-            </section>
 
-            <!-- INTERACTIVE WAND SPELL CASTER (CANVAS ENGINE) -->
-            <section class="bg-slate-900/80 border-4 border-indigo-500/60 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden mt-6">
-                <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-red-500 via-blue-500 via-amber-400 to-purple-500"></div>
+                <a href="https://ultrathyme42.github.io/Website-Tester/" 
+                   onclick="playMagicSound()"
+                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-900/30 flex items-center justify-center gap-2 border border-purple-400/30 group-hover:shadow-purple-700/50">
+                    <span>Join / Test Web</span>
+                    <i class="fa-solid fa-vial-circle-check text-sm group-hover:rotate-12 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Card 3: Prodidows -->
+            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
                 
-                <div class="flex flex-col lg:flex-row gap-8 items-center">
-                    <div class="lg:w-1/3 flex flex-col gap-4 text-left">
-                        <div class="bg-indigo-900/80 border border-indigo-400/40 text-indigo-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest w-fit">
-                            Interactive Spellcaster
-                        </div>
-                        <h3 class="text-3xl font-fantasy font-black text-white">Wand Spell Sandbox</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Need to practice your battle spells? Click on the arena to fire high-energy retro spell particles! Select your favorite legacy magic element below.
-                        </p>
-                        
-                        <!-- Element Selector Buttons -->
-                        <div class="grid grid-cols-2 gap-2 mt-2" id="spellSelector">
-                            <button data-spell="fire" class="spell-btn py-2 px-3 rounded-xl border-2 border-red-500 bg-red-950/40 hover:bg-red-900/60 text-red-200 font-bold text-sm flex items-center gap-2 transition-all active:scale-95 shadow-inner">
-                                <span class="w-3 h-3 rounded-full bg-red-500 shadow-glow-red animate-ping absolute"></span>
-                                <span class="w-3 h-3 rounded-full bg-red-500 relative"></span>
-                                Fire Storm
-                            </button>
-                            <button data-spell="water" class="spell-btn py-2 px-3 rounded-xl border-2 border-blue-500 bg-blue-950/40 hover:bg-blue-900/60 text-blue-200 font-bold text-sm flex items-center gap-2 transition-all active:scale-95 shadow-inner">
-                                <span class="w-3 h-3 rounded-full bg-blue-500 relative"></span>
-                                Torrent Ball
-                            </button>
-                            <button data-spell="star" class="spell-btn py-2 px-3 rounded-xl border-2 border-yellow-500 bg-yellow-950/40 hover:bg-yellow-900/60 text-yellow-200 font-bold text-sm flex items-center gap-2 transition-all active:scale-95 shadow-inner">
-                                <span class="w-3 h-3 rounded-full bg-yellow-400 relative"></span>
-                                Star Strike
-                            </button>
-                            <button data-spell="shadow" class="spell-btn py-2 px-3 rounded-xl border-2 border-purple-500 bg-purple-950/40 hover:bg-purple-900/60 text-purple-200 font-bold text-sm flex items-center gap-2 transition-all active:scale-95 shadow-inner">
-                                <span class="w-3 h-3 rounded-full bg-purple-500 relative"></span>
-                                Shadow Bolt
-                            </button>
-                        </div>
-                        
-                        <div class="text-xs text-slate-400 mt-2 bg-slate-950/40 p-3 rounded-lg border border-slate-800">
-                            <i class="fa-solid fa-circle-info text-yellow-500 mr-1"></i>
-                            <strong>Tip:</strong> Tap and drag your cursor in the wizard scroll arena to draw magical energy.
-                        </div>
+                <div class="my-4">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-desktop"></i>
                     </div>
-                    
-                    <div class="w-full lg:w-2/3 relative">
-                        <div class="absolute top-3 left-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-indigo-500/30 text-xs font-bold text-yellow-400 pointer-events-none z-10 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                            ACTIVE TRAINING ARENA
-                        </div>
-                        <canvas id="spellCanvas" class="w-full h-[320px] bg-slate-950 rounded-2xl border-2 border-indigo-500/40 shadow-inner cursor-crosshair block"></canvas>
-                    </div>
-                </div>
-            </section>
-
-            <!-- NOSTALGIC PET GRIMOIRE SECTION -->
-            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mt-6">
-                
-                <!-- Left panel: Pet selection menu -->
-                <div class="bg-slate-900/80 border-4 border-amber-600/60 rounded-3xl p-6 shadow-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="bg-amber-500/10 border border-amber-500/40 text-amber-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest w-fit mb-4">
-                            Legacy Bestiary
-                        </div>
-                        <h3 class="text-3xl font-fantasy font-black text-white mb-2">Pet Grimoire</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                            Review the classic elements and statistics of creatures that fought beside wizards in classic battle stages! Choose a pet to inspect their spell affinity.
-                        </p>
-                        
-                        <!-- Mini Interactive Pet List -->
-                        <div class="flex flex-col gap-3" id="petSelectorList">
-                            <button data-pet="triptrop" class="pet-item-btn w-full bg-indigo-950/60 hover:bg-indigo-900 border-2 border-indigo-500/40 p-3 rounded-2xl flex items-center gap-4 text-left transition-all">
-                                <div class="w-12 h-12 bg-emerald-500/20 rounded-xl border border-emerald-400/50 flex items-center justify-center text-3xl">🌿</div>
-                                <div>
-                                    <h4 class="font-bold text-white text-base">TripTrop</h4>
-                                    <p class="text-xs text-slate-300">Plant Element • Starter Wizard Pet</p>
-                                </div>
-                            </button>
-                            <button data-pet="bigfoot" class="pet-item-btn w-full bg-indigo-950/60 hover:bg-indigo-900 border-2 border-indigo-500/40 p-3 rounded-2xl flex items-center gap-4 text-left transition-all">
-                                <div class="w-12 h-12 bg-cyan-500/20 rounded-xl border border-cyan-400/50 flex items-center justify-center text-3xl">❄️</div>
-                                <div>
-                                    <h4 class="font-bold text-white text-base">Bigfoot</h4>
-                                    <p class="text-xs text-slate-300">Ice Element • Frost-Capped Mountains</p>
-                                </div>
-                            </button>
-                            <button data-pet="hotpot" class="pet-item-btn w-full bg-indigo-950/60 hover:bg-indigo-900 border-2 border-indigo-500/40 p-3 rounded-2xl flex items-center gap-4 text-left transition-all">
-                                <div class="w-12 h-12 bg-red-500/20 rounded-xl border border-red-400/50 flex items-center justify-center text-3xl">🔥</div>
-                                <div>
-                                    <h4 class="font-bold text-white text-base">Hotpot</h4>
-                                    <p class="text-xs text-slate-300">Fire Element • Bonfire Spire Depths</p>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Prodidows</h2>
+                    <p class="text-slate-400 text-sm">Explore Prodidows - the nostalgic wizard-themed web desktop environment.</p>
                 </div>
 
-                <!-- Right/Center Panel: Active Pet Display -->
-                <div class="lg:col-span-2 bg-gradient-to-br from-indigo-950 to-slate-900 border-4 border-amber-600/60 rounded-3xl p-6 sm:p-8 shadow-2xl relative flex flex-col md:flex-row gap-8 items-center justify-between">
-                    <div class="absolute top-4 right-4 text-yellow-500 text-3xl opacity-30"><i class="fa-solid fa-feather-pointed"></i></div>
-                    
-                    <!-- SVG Display Canvas / Illustration of Pet -->
-                    <div class="w-full md:w-1/2 bg-slate-950/70 border-2 border-indigo-500/30 rounded-2xl p-6 flex flex-col items-center justify-center relative min-h-[250px]">
-                        <div id="petArtContainer" class="text-7xl mb-4 select-none transform hover:scale-110 transition-transform cursor-pointer animate-bounce" style="animation-duration: 3s;">
-                            🌿
-                        </div>
-                        <div class="text-center">
-                            <h4 id="petDisplayName" class="text-2xl font-fantasy font-black text-yellow-400">TripTrop</h4>
-                            <span id="petDisplayTag" class="px-3 py-1 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold uppercase tracking-wider rounded-full mt-2 inline-block">Plant Mage Class</span>
-                        </div>
+                <a href="https://ultrathyme42.github.io/prodidows/" 
+                   onclick="playMagicSound()"
+                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-white bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-blue-500 shadow-lg shadow-cyan-900/30 flex items-center justify-center gap-2 border border-cyan-400/30 group-hover:shadow-cyan-600/50">
+                    <span>Open Prodidows</span>
+                    <i class="fa-solid fa-window-maximize text-sm group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Features Showcase Grid -->
+        <div class="w-full max-w-5xl bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-slate-800 backdrop-blur-md text-left">
+            <h3 class="font-display font-bold text-xl text-amber-300 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                About the Old Prodigy Ecosystem
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-slate-300">
+                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
+                    <div class="text-amber-400 font-bold mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Classic Builds
                     </div>
-
-                    <!-- Pet Stats & Information panel -->
-                    <div class="w-full md:w-1/2 flex flex-col gap-5 text-left">
-                        <h4 class="text-xl font-bold text-white border-b-2 border-indigo-500/30 pb-2">Magical Parameters</h4>
-                        
-                        <!-- Custom styled progress bars -->
-                        <div class="flex flex-col gap-3">
-                            <div>
-                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
-                                    <span>Spell Power (Power Boost)</span>
-                                    <span id="statPower">82%</span>
-                                </div>
-                                <div class="w-full bg-slate-950 rounded-full h-3 border border-slate-800">
-                                    <div id="barPower" class="bg-gradient-to-r from-red-500 to-yellow-500 h-full rounded-full transition-all duration-500" style="width: 82%;"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
-                                    <span>Heart Points (HP Pool)</span>
-                                    <span id="statHP">1,250 HP</span>
-                                </div>
-                                <div class="w-full bg-slate-950 rounded-full h-3 border border-slate-800">
-                                    <div id="barHP" class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500" style="width: 65%;"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-xs font-bold text-slate-300 mb-1">
-                                    <span>Critically Cast Chance</span>
-                                    <span id="statCrit">75%</span>
-                                </div>
-                                <div class="w-full bg-slate-950 rounded-full h-3 border border-slate-800">
-                                    <div id="barCrit" class="bg-gradient-to-r from-purple-500 to-pink-500 h-full rounded-full transition-all duration-500" style="width: 75%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-slate-950/50 p-4 rounded-xl border border-indigo-500/20 text-sm text-slate-300 italic" id="petDescription">
-                            "A highly loyal companion that channels direct forest magic. Famous for its Vine Strike spell which binds enemies with high mathematical accuracy."
-                        </div>
+                    Revisit old battle UI, classic elemental spells, pets, and original game mechanics.
+                </div>
+                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
+                    <div class="text-purple-400 font-bold mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip"></i> Experimental Tools
                     </div>
-
+                    Test upcoming modifications and web utilities through the Insider Program.
                 </div>
-            </section>
-
-            <!-- ARCHIVE HISTORY & CHRONICLES (ACCORDIONS) -->
-            <section class="bg-slate-900/80 border-4 border-amber-600/60 rounded-3xl p-6 sm:p-8 shadow-2xl mt-6">
-                <div class="max-w-4xl mx-auto text-left">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                        <div>
-                            <h3 class="text-3xl font-fantasy font-black text-white">The Chronicles of Old Prodigy</h3>
-                            <p class="text-slate-300 text-sm mt-1">Frequently asked scroll archives on development and history.</p>
-                        </div>
-                        <i class="fa-solid fa-book-open text-amber-500 text-4xl hidden sm:block"></i>
+                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
+                    <div class="text-cyan-400 font-bold mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code"></i> Prodidows OS
                     </div>
-
-                    <div class="flex flex-col gap-4">
-                        
-                        <!-- Accordion 1 -->
-                        <div class="border-2 border-indigo-500/30 rounded-2xl bg-indigo-950/40 overflow-hidden">
-                            <button class="accordion-header w-full p-4 flex justify-between items-center text-left hover:bg-indigo-900/30 transition-colors">
-                                <span class="font-bold text-white text-lg flex items-center gap-3">
-                                    <span class="text-yellow-500 text-sm">✦</span> What exactly is "Old Prodigy"?
-                                </span>
-                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                            </button>
-                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                                <div class="p-4 border-t border-indigo-500/20 text-slate-300 text-sm leading-relaxed">
-                                    Old Prodigy represents the magical eras from roughly 2014 to late 2018 when the game utilized dynamic 2D pixel styles, classic character sprites, tactical battle menus, and older math curriculum engines. It represents pure gaming nostalgia for millions who grew up in the digital wizard academy.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Accordion 2 -->
-                        <div class="border-2 border-indigo-500/30 rounded-2xl bg-indigo-950/40 overflow-hidden">
-                            <button class="accordion-header w-full p-4 flex justify-between items-center text-left hover:bg-indigo-900/30 transition-colors">
-                                <span class="font-bold text-white text-lg flex items-center gap-3">
-                                    <span class="text-yellow-500 text-sm">✦</span> How do the redirects work on this landing page?
-                                </span>
-                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                            </button>
-                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                                <div class="p-4 border-t border-indigo-500/20 text-slate-300 text-sm leading-relaxed">
-                                    This landing page operates as a convenient master gate. The <strong class="text-emerald-400">Old Prodigy Insider</strong> button redirects to the Website-Tester dashboard, the <strong class="text-yellow-400">Versions</strong> button accesses the old client selector, and the <strong class="text-purple-400">Prodidows</strong> button launches the comprehensive fan operating system.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Accordion 3 -->
-                        <div class="border-2 border-indigo-500/30 rounded-2xl bg-indigo-950/40 overflow-hidden">
-                            <button class="accordion-header w-full p-4 flex justify-between items-center text-left hover:bg-indigo-900/30 transition-colors">
-                                <span class="font-bold text-white text-lg flex items-center gap-3">
-                                    <span class="text-yellow-500 text-sm">✦</span> Can I play these versions with old friends?
-                                </span>
-                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-                            </button>
-                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-                                <div class="p-4 border-t border-indigo-500/20 text-slate-300 text-sm leading-relaxed">
-                                    Multiplayer isn't available yet. Keep tabs on the "Old Prodigy Insider" for direct documentation regarding community server setups and wizard configurations.
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <!-- FOOTER -->
-        <footer class="w-full bg-slate-950 border-t-4 border-yellow-600 py-8 px-4 text-center relative z-10 mt-12">
-            <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
-                <div class="flex items-center gap-2 text-yellow-500 text-xl font-fantasy">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>OLD PRODIGY ARCHIVES</span>
-                </div>
-                
-                <!-- Quick links row -->
-                <div class="flex flex-wrap justify-center gap-6 text-sm font-semibold text-indigo-300 mb-2">
-                    <a href="https://ultrathyme42.github.io/Website-Tester/" target="_blank" class="hover:text-yellow-400 transition-colors">Insider</a>
-                    <span>•</span>
-                    <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" target="_blank" class="hover:text-yellow-400 transition-colors">Play Versions</a>
-                    <span>•</span>
-                    <a href="https://ultrathyme42.github.io/prodidows/" target="_blank" class="hover:text-yellow-400 transition-colors">Prodidows</a>
-                </div>
-
-                <p class="text-xs text-slate-500 max-w-lg leading-relaxed">
-                    This is an archival landing community portal. All assets, trademarks, and concepts related to Prodigy Math Game are owned by Prodigy Education Inc. This is a nostalgic preservation and test directory.
-                </p>
-                
-                <div class="text-[10px] text-slate-600 mt-4">
-                    © 2026 Old Prodigy Archives. Powered by ancient magical arithmetic.
+                    Experience a unique operating system interface built specifically for Prodigy fans.
                 </div>
             </div>
-        </footer>
+        </div>
 
-    </div>
+    </main>
 
-    <!-- JAVASCRIPT LOGIC AND ENGAGING FEATURES -->
+    <!-- Footer -->
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-slate-800/60 mt-8">
+        <div>
+            &copy; Old Prodigy Project. Created by <span class="text-slate-400 font-semibold">ultrathyme42</span>.
+        </div>
+        <div class="flex items-center gap-6">
+            <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" class="hover:text-amber-400 transition-colors">Version Select</a>
+            <a href="https://ultrathyme42.github.io/Website-Tester/" class="hover:text-purple-400 transition-colors">Insider Program</a>
+            <a href="https://ultrathyme42.github.io/prodidows/" class="hover:text-cyan-400 transition-colors">Prodidows</a>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Engine -->
     <script>
-        // --- NOSTALIGIC AUDIO SYNTHESIS ENGINE (Web Audio API) ---
-        // Generates actual RPG chiptunes!
+        // --- Web Audio API Synth Sound Effects ---
+        let audioEnabled = false;
         let audioCtx = null;
-        let isMusicPlaying = false;
-        let melodySequence = null;
-        let musicTimeout = null;
 
-        const synthPlayBtn = document.getElementById('synthPlayBtn');
-        const musicIcon = document.getElementById('musicIcon');
-        const musicText = document.getElementById('musicText');
-        const synthVolume = document.getElementById('synthVolume');
-
-        // Classical wizard fantasy scale in A minor
-        // Frequencies corresponding to notes: A4, C5, D5, E5, G5, A5
-        const noteFreqs = {
-            'A4': 440.00,
-            'B4': 493.88,
-            'C5': 523.25,
-            'D5': 587.33,
-            'E5': 659.25,
-            'F5': 698.46,
-            'G5': 783.99,
-            'A5': 880.00
-        };
-
-        const fantasyMelody = [
-            { note: 'A4', duration: 0.3 },
-            { note: 'C5', duration: 0.3 },
-            { note: 'E5', duration: 0.6 },
-            { note: 'D5', duration: 0.3 },
-            { note: 'C5', duration: 0.3 },
-            { note: 'B4', duration: 0.6 },
-            { note: 'E4', duration: 0.3 }, // low E helper
-            { note: 'G5', duration: 0.3 },
-            { note: 'E5', duration: 0.9 },
-            // Repeat/Variation
-            { note: 'A4', duration: 0.3 },
-            { note: 'C5', duration: 0.3 },
-            { note: 'E5', duration: 0.6 },
-            { note: 'A5', duration: 0.6 },
-            { note: 'G5', duration: 0.3 },
-            { note: 'F5', duration: 0.3 },
-            { note: 'E5', duration: 1.2 }
-        ];
-
-        // Custom lower scale E helper
-        noteFreqs['E4'] = 329.63;
-
-        function initAudio() {
+        function toggleAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
-        }
+            
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
 
-        function playSynthTone(freq, duration, startTime) {
-            if (!audioCtx) return;
-            
-            // Oscillator for chiptune magic feel
-            const osc = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            // Retro triangle/sawtooth blending
-            osc.type = 'triangle'; 
-            osc.frequency.setValueAtTime(freq, startTime);
-            
-            // Volume control with volume slider multiplier
-            const vol = parseFloat(synthVolume.value) || 0.5;
-            gainNode.gain.setValueAtTime(vol * 0.15, startTime);
-            // Exponential decay for retro bell feel
-            gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-            
-            osc.start(startTime);
-            osc.stop(startTime + duration);
-        }
+            audioEnabled = !audioEnabled;
+            const soundIcon = document.getElementById('soundIcon');
+            const soundText = document.getElementById('soundText');
 
-        let currentNoteIndex = 0;
-        function playNextNote() {
-            if (!isMusicPlaying) return;
-            
-            initAudio();
-            const noteData = fantasyMelody[currentNoteIndex];
-            const now = audioCtx.currentTime;
-            
-            playSynthTone(noteFreqs[noteData.note], noteData.duration, now);
-            
-            // Schedule the next note sequence
-            const tempoMultiplier = 1400; // note length scaling
-            currentNoteIndex = (currentNoteIndex + 1) % fantasyMelody.length;
-            
-            musicTimeout = setTimeout(playNextNote, noteData.duration * tempoMultiplier);
-        }
-
-        function toggleMusic() {
-            if (!isMusicPlaying) {
-                initAudio();
-                isMusicPlaying = true;
-                musicIcon.className = "fa-solid fa-pause";
-                musicText.innerText = "Mute Spell Melody";
-                currentNoteIndex = 0;
-                playNextNote();
+            if (audioEnabled) {
+                soundIcon.className = 'fa-solid fa-volume-high text-amber-400';
+                soundText.innerText = 'Sound: On';
+                playMagicSound();
             } else {
-                isMusicPlaying = false;
-                clearTimeout(musicTimeout);
-                musicIcon.className = "fa-solid fa-play";
-                musicText.innerText = "Play Spell Melody";
+                soundIcon.className = 'fa-solid fa-volume-xmark text-slate-400';
+                soundText.innerText = 'Sound: Off';
             }
         }
 
-        synthPlayBtn.addEventListener('click', toggleMusic);
+        function playMagicSound() {
+            if (!audioEnabled || !audioCtx) return;
 
-        // --- INTERACTIVE WAND SPELL CANVASE ENGINE ---
-        const canvas = document.getElementById('spellCanvas');
+            try {
+                const now = audioCtx.currentTime;
+                
+                // Arpeggio frequencies for magical spell sound
+                const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                
+                freqs.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + index * 0.08);
+
+                    gain.gain.setValueAtTime(0.1, now + index * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.08 + 0.3);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now + index * 0.08);
+                    osc.stop(now + index * 0.08 + 0.3);
+                });
+            } catch (e) {
+                console.error("Audio playback error:", e);
+            }
+        }
+
+        // --- Magical Particle Background Canvas ---
+        const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        let currentSpell = 'fire';
-        const particles = [];
 
-        // Color maps for active wizard spells
-        const spellColors = {
-            fire: { primary: '#f97316', secondary: '#ef4444', sparkle: '#facc15' },
-            water: { primary: '#3b82f6', secondary: '#06b6d4', sparkle: '#93c5fd' },
-            star: { primary: '#facc15', secondary: '#fbbf24', sparkle: '#ffffff' },
-            shadow: { primary: '#a855f7', secondary: '#6366f1', sparkle: '#c084fc' }
-        };
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
-        // Resize Canvas to fit wrapper dynamically
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            drawInitialCanvasInfo();
-        }
-
-        function drawInitialCanvasInfo() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#334155';
-            ctx.font = '16px Fredoka, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('⚡ TAP OR DRAG TO CAST SPELLS ⚡', canvas.width / 2, canvas.height / 2);
-        }
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
 
         class Particle {
-            constructor(x, y, spellType) {
-                this.x = x;
-                this.y = y;
-                this.spellType = spellType;
-                const colors = spellColors[spellType];
-                this.color = Math.random() > 0.4 ? colors.primary : (Math.random() > 0.5 ? colors.secondary : colors.sparkle);
-                this.radius = Math.random() * 6 + 2;
-                
-                // Exploding magic vectors
-                const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 4 + 1;
-                this.vx = Math.cos(angle) * speed;
-                this.vy = Math.sin(angle) * speed - (Math.random() * 1.5); // drift upwards slightly
-                this.life = 1.0;
-                this.decay = Math.random() * 0.02 + 0.01;
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = -Math.random() * 0.6 - 0.2; // Slowly float up
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.color = Math.random() > 0.5 ? '#fbbf24' : '#a855f7'; // Gold or Purple
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.life -= this.decay;
-                if (this.radius > 0.2) this.radius -= 0.05;
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.y < 0 || this.x < 0 || this.x > width) {
+                    this.reset();
+                    this.y = height;
+                }
             }
 
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.life;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                
-                // Outer glow shadow
-                ctx.shadowBlur = 10;
+                ctx.globalAlpha = this.opacity;
+                ctx.shadowBlur = 8;
                 ctx.shadowColor = this.color;
-                
                 ctx.fill();
-                ctx.restore();
+                ctx.globalAlpha = 1.0;
             }
         }
 
-        // Add Spell Particles
-        function spawnSpellParticles(x, y) {
-            const count = currentSpell === 'star' ? 25 : 15;
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle(x, y, currentSpell));
-            }
+        const particles = [];
+        const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
         }
 
-        // Event Listeners for Wand/Canvas triggers
-        canvas.addEventListener('mousedown', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            spawnSpellParticles(x, y);
-        });
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
 
-        canvas.addEventListener('mousemove', (e) => {
-            if (e.buttons === 1) { // Left mouse is held down
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                spawnSpellParticles(x, y);
-            }
-        });
-
-        // Touch support for phones
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            spawnSpellParticles(x, y);
-        }, { passive: false });
-
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0];
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            spawnSpellParticles(x, y);
-        }, { passive: false });
-
-        // Spell Selection Buttons State
-        const spellBtns = document.querySelectorAll('.spell-btn');
-        spellBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                spellBtns.forEach(b => b.classList.remove('bg-indigo-900', 'border-yellow-400', 'shadow-glow-gold'));
-                btn.classList.add('bg-indigo-900', 'border-yellow-400', 'shadow-glow-gold');
-                currentSpell = btn.dataset.spell;
-            });
-        });
-
-        // Main Animation Loop
-        function animate() {
-            ctx.fillStyle = 'rgba(15, 23, 42, 0.2)'; // trail effect
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // If there are no particles, guide text persists nicely
-            if (particles.length === 0) {
-                ctx.fillStyle = '#64748b';
-                ctx.font = '14px Fredoka, sans-serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('✨ TAP OR DRAG INSIDE TRAINING ARENA TO CAST ✨', canvas.width / 2, canvas.height / 2);
-            }
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
+            particles.forEach(p => {
                 p.update();
                 p.draw();
-                if (p.life <= 0 || p.radius <= 0) {
-                    particles.splice(i, 1);
-                }
-            }
-            requestAnimationFrame(animate);
+            });
+
+            requestAnimationFrame(animateParticles);
         }
 
-        // --- NOSTALGIC PET SELECTION SYSTEM ---
-        const petsData = {
-            triptrop: {
-                name: "TripTrop",
-                tag: "Plant Mage Class",
-                art: "🌿",
-                power: "82%",
-                hp: "1,250 HP",
-                crit: "75%",
-                desc: "A highly loyal companion that channels direct forest magic. Famous for its Vine Strike spell which binds enemies with high mathematical accuracy.",
-                powerVal: 82,
-                hpVal: 65,
-                critVal: 75
-            },
-            bigfoot: {
-                name: "Bigfoot",
-                tag: "Ice Champion Class",
-                art: "❄️",
-                power: "90%",
-                hp: "1,600 HP",
-                crit: "50%",
-                desc: "Hailing from Shiverchill Mountain, Bigfoot commands absolute cryo-magic. It launches giant frost spikes to stop cold fire wizards in their tracks.",
-                powerVal: 90,
-                hpVal: 85,
-                critVal: 50
-            },
-            hotpot: {
-                name: "Hotpot",
-                tag: "Fire Pyromancer Class",
-                art: "🔥",
-                power: "95%",
-                hp: "950 HP",
-                crit: "85%",
-                desc: "Don't let its cute pot form fool you. Hotpot harnesses unstable magma power. Its Flame Surge deals astronomical critical damage but leaves its own HP quite fragile.",
-                powerVal: 95,
-                hpVal: 45,
-                critVal: 85
-            }
-        };
-
-        const petButtons = document.querySelectorAll('.pet-item-btn');
-        const petArtContainer = document.getElementById('petArtContainer');
-        const petDisplayName = document.getElementById('petDisplayName');
-        const petDisplayTag = document.getElementById('petDisplayTag');
-        const statPower = document.getElementById('statPower');
-        const statHP = document.getElementById('statHP');
-        const statCrit = document.getElementById('statCrit');
-        const barPower = document.getElementById('barPower');
-        const barHP = document.getElementById('barHP');
-        const barCrit = document.getElementById('barCrit');
-        const petDescription = document.getElementById('petDescription');
-
-        function selectPet(petKey) {
-            const pet = petsData[petKey];
-            if (!pet) return;
-
-            // Highlight active button
-            petButtons.forEach(btn => {
-                if (btn.dataset.pet === petKey) {
-                    btn.classList.add('border-amber-500', 'bg-indigo-900/80');
-                } else {
-                    btn.classList.remove('border-amber-500', 'bg-indigo-900/80');
-                }
-            });
-
-            // Update details
-            petArtContainer.innerText = pet.art;
-            petDisplayName.innerText = pet.name;
-            petDisplayTag.innerText = pet.tag;
-            statPower.innerText = pet.power;
-            statHP.innerText = pet.hp;
-            statCrit.innerText = pet.crit;
-            petDescription.innerText = `"${pet.desc}"`;
-
-            // Animate transition stat bars
-            barPower.style.width = pet.powerVal + '%';
-            barHP.style.width = pet.hpVal + '%';
-            barCrit.style.width = pet.critVal + '%';
-
-            // Fun active element colors
-            if (petKey === 'triptrop') {
-                petDisplayTag.className = "px-3 py-1 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold uppercase tracking-wider rounded-full mt-2 inline-block";
-            } else if (petKey === 'bigfoot') {
-                petDisplayTag.className = "px-3 py-1 bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 text-xs font-bold uppercase tracking-wider rounded-full mt-2 inline-block";
-            } else if (petKey === 'hotpot') {
-                petDisplayTag.className = "px-3 py-1 bg-red-950/80 border border-red-500/50 text-red-300 text-xs font-bold uppercase tracking-wider rounded-full mt-2 inline-block";
-            }
-        }
-
-        petButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                selectPet(btn.dataset.pet);
-            });
-        });
-
-        // Initialize TripTrop selection
-        selectPet('triptrop');
-
-        // Pet animation on click (shake or pulse)
-        petArtContainer.addEventListener('click', () => {
-            petArtContainer.classList.remove('animate-bounce');
-            void petArtContainer.offsetWidth; // reset CSS triggers
-            petArtContainer.classList.add('animate-bounce');
-        });
-
-
-        // --- ACCORDION LORE LOGIC ---
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const icon = header.querySelector('i');
-                
-                // Toggle active state
-                if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                    content.style.maxHeight = '0px';
-                    icon.classList.remove('rotate-180');
-                } else {
-                    // Close other open accordions
-                    document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = '0px');
-                    document.querySelectorAll('.accordion-header i').forEach(i => i.classList.remove('rotate-180'));
-                    
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.classList.add('rotate-180');
-                }
-            });
-        });
-
-
-        // --- EXTRA VISUAL SPARKLE ON REDIRECT CLICKS ---
-        const allSelectButtons = document.querySelectorAll('.select-button');
-        allSelectButtons.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Spawn a tiny light sparkle
-                const sparkle = document.createElement('span');
-                sparkle.classList.add('magic-sparkle');
-                sparkle.style.left = x + 'px';
-                sparkle.style.top = y + 'px';
-                
-                const randomX = (Math.random() - 0.5) * 80;
-                const randomY = (Math.random() - 0.5) * 80;
-                sparkle.style.setProperty('--x', randomX + 'px');
-                sparkle.style.setProperty('--y', randomY + 'px');
-                
-                btn.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 1000);
-            });
-        });
-
-
-        // --- RUN ENGINE ON LOAD ---
         window.onload = function() {
-            resizeCanvas();
-            animate();
-            
-            // Highlight fire by default in selector
-            document.querySelector('[data-spell="fire"]').classList.add('bg-indigo-900', 'border-yellow-400', 'shadow-glow-gold');
+            animateParticles();
         };
-
-        window.addEventListener('resize', resizeCanvas);
     </script>
 </body>
 </html>
