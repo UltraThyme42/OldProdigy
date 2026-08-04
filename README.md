@@ -1,4 +1,4 @@
-# Arial hates playing monopoly go with alexa cuz shes female XD
+# Credits
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
 Siteforkers: UltraThyme42, Slappygig/Toonigy, etc  https://github.com/UltraThyme42 https://github.com/slappygig https://github.com/Toonigy
