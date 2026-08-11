@@ -1,527 +1,675 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Prodigy - Launch Selection Chamber</title>
+    <title>Old Prodigy - Version Select</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for symbols -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        fantasy: ['Cinzel', 'serif'],
-                        retro: ['Fredoka', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        magic: ['Cinzel', 'serif']
                     },
-                    boxShadow: {
-                        'glow-gold': '0 0 20px rgba(234, 179, 8, 0.7)',
-                        'glow-emerald': '0 0 20px rgba(16, 185, 129, 0.7)',
-                        'glow-purple': '0 0 20px rgba(168, 85, 247, 0.7)',
-                        'glow-cyan': '0 0 20px rgba(6, 182, 212, 0.7)',
-                        'inner-dark': 'inset 0 4px 12px rgba(0,0,0,0.9)',
+                    colors: {
+                        prodigy: {
+                            blue: '#1e40af',
+                            gold: '#fbbf24',
+                            purple: '#6b21a8',
+                            dark: '#0f172a',
+                            glow: '#38bdf8'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(251, 191, 36, 0.4), 0 0 30px rgba(56, 189, 248, 0.2)' },
+                            '50%': { boxShadow: '0 0 25px rgba(251, 191, 36, 0.8), 0 0 50px rgba(56, 189, 248, 0.5)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        /* Custom scrollbar to match wizard theme */
+        body {
+            background: radial-gradient(circle at center, #1b1335 0%, #0a0612 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .magic-card {
+            background: rgba(30, 27, 58, 0.75);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .magic-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(107, 33, 168, 0.5);
+        }
+
+        .shine-button {
+            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+            background-size: 200% 100%;
+            transition: all 0.3s ease;
+        }
+
+        .shine-button:hover {
+            background-position: 100% 0;
+            filter: brightness(1.1);
+        }
+
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0b091a;
+            background: #0a0612;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d97706;
+            background: #3b0764;
             border-radius: 4px;
         }
-        .rune-pulse {
-            animation: runePulse 4s ease-in-out infinite;
-        }
-        @keyframes runePulse {
-            0%, 100% { opacity: 0.2; transform: scale(0.95); }
-            50% { opacity: 0.6; transform: scale(1.05); }
-        }
-        /* Spellbook card interactive scale */
-        .spellbook-card {
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .spellbook-card:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-        /* Custom sparkle trail effect */
-        .sparkle-dot {
-            position: absolute;
-            pointer-events: none;
-            background: white;
-            border-radius: 50%;
-            animation: sparkleAnim 0.8s ease-out forwards;
-        }
-        @keyframes sparkleAnim {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b21a8;
         }
     </style>
 </head>
-<body class="bg-[#0c0a21] text-slate-100 font-retro overflow-x-hidden min-h-screen relative flex flex-col justify-between">
-    
-    <!-- Canvas background runes element -->
-    <canvas id="bgRuneCanvas" class="absolute inset-0 pointer-events-none z-0 opacity-40"></canvas>
+<body class="flex flex-col justify-between min-h-screen relative font-sans">
 
-    <!-- MAIN PORTAL HEADER -->
-    <header class="w-full bg-slate-950/90 border-b-4 border-amber-600 px-4 py-4 relative z-10 shadow-2xl">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-amber-500 to-yellow-300 p-2.5 rounded-xl border-2 border-amber-600 shadow-glow-gold animate-bounce" style="animation-duration: 4s;">
-                    <i class="fa-solid fa-scroll text-slate-950 text-2xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-fantasy font-black tracking-widest bg-gradient-to-r from-yellow-400 via-amber-200 to-yellow-500 bg-clip-text text-transparent">
-                        THE TIMELINE CHAMBER
-                    </h1>
-                    <p class="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Old Prodigy Launcher Portal</p>
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <header class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+        <a href="https://ultrathyme42.github.io/OldProdigy/" class="flex items-center gap-3 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-amber-400 p-0.5 flex items-center justify-center shadow-lg shadow-purple-900/40 group-hover:scale-105 transition-transform">
+                <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+                    <i class="fa-solid font-magic text-2xl text-amber-400 fa-book-bookmark"></i>
                 </div>
             </div>
-
-            <!-- Profile identity widgets -->
-            <div class="flex flex-wrap items-center justify-center gap-3 bg-slate-900/80 border border-indigo-500/30 p-2.5 rounded-2xl">
-                <!-- Name customizer -->
-                <div class="flex items-center gap-2">
-                    <label for="wizardName" class="text-xs font-bold text-amber-300 uppercase">Wizard:</label>
-                    <input type="text" id="wizardName" value="Guest Wizard" class="bg-slate-950 text-yellow-300 text-xs px-2.5 py-1.5 rounded-lg border border-yellow-600/40 focus:border-yellow-400 focus:outline-none w-32 font-bold" title="Enter your Wizard Name">
-                </div>
-                <!-- Element badge selector -->
-                <div class="flex items-center gap-1.5 bg-indigo-950/60 p-1 rounded-lg border border-indigo-500/20">
-                    <button id="elem-fire" onclick="setWizardElement('fire')" class="w-7 h-7 rounded-md bg-red-950/60 hover:bg-red-900 text-red-400 text-xs flex items-center justify-center border border-red-500/30 transition-all" title="Affiliate with Fire element">🔥</button>
-                    <button id="elem-water" onclick="setWizardElement('water')" class="w-7 h-7 rounded-md bg-blue-950/60 hover:bg-blue-900 text-blue-400 text-xs flex items-center justify-center border border-blue-500/30 transition-all" title="Affiliate with Water element">💧</button>
-                    <button id="elem-star" onclick="setWizardElement('star')" class="w-7 h-7 rounded-md bg-yellow-950/60 hover:bg-yellow-900 text-yellow-400 text-xs flex items-center justify-center border border-yellow-500/30 transition-all" title="Affiliate with Star element">⭐</button>
-                    <button id="elem-shadow" onclick="setWizardElement('shadow')" class="w-7 h-7 rounded-md bg-purple-950/60 hover:bg-purple-900 text-purple-400 text-xs flex items-center justify-center border border-purple-500/30 transition-all" title="Affiliate with Shadow element">🔮</button>
-                </div>
+            <div>
+                <span class="font-display font-bold text-2xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">VERSION SELECT</span>
+                <span class="block text-xs text-purple-300 font-semibold tracking-widest uppercase">Old Prodigy Archive</span>
             </div>
+        </a>
 
+        <div class="flex items-center gap-4">
+            <button id="soundToggle" onclick="toggleAudio()" class="px-3.5 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 flex items-center gap-2 transition-all">
+                <i id="soundIcon" class="fa-solid fa-volume-xmark text-amber-400"></i>
+                <span id="soundText">Sound: Off</span>
+            </button>
+            <a href="https://ultrathyme42.github.io/OldProdigy/" class="px-3.5 py-2 rounded-xl bg-purple-900/40 hover:bg-purple-800/60 border border-purple-500/30 text-xs font-semibold text-purple-200 flex items-center gap-2 transition-all">
+                <i class="fa-solid fa-house text-amber-400"></i>
+                <span class="hidden sm:inline">Main Hub</span>
+            </a>
         </div>
     </header>
 
-    <main class="relative z-10 flex-grow max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full flex flex-col gap-10">
+    <main class="relative z-10 flex-1 max-w-6xl mx-auto px-6 py-4 flex flex-col items-center">
         
-        <!-- Interactive Banner info -->
-        <section class="text-center max-w-3xl mx-auto flex flex-col items-center gap-4">
-            <span class="inline-block bg-yellow-500/15 border-2 border-yellow-500/45 text-yellow-400 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider animate-pulse">
-                🔮 UNSTABLE TIMELINE STREAMS DETECTED
-            </span>
-            <h2 class="text-3xl sm:text-5xl font-fantasy font-black text-white drop-shadow-[0_4px_6px_rgba(0,0,0,0.6)] leading-tight">
-                SELECT A CLASSIC ERA TO LOAD
-            </h2>
-            <p class="text-indigo-200 text-sm sm:text-base leading-relaxed">
-                Welcome, <span id="dynamicWizName" class="text-yellow-400 font-bold">Guest Wizard</span>! Hover over a client scroll to preview the nostalgic magic, and click to ignite the time transition gateway.
+        <!-- Header Banner -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm font-medium mb-4 animate-float">
+                <i class="fa-solid fa-clock-rotate-left text-amber-400"></i>
+                <span>Legacy Game Client Vault</span>
+            </div>
+            <h1 class="font-display text-4xl sm:text-5xl font-extrabold mb-3 tracking-tight">
+                Select Your <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">Prodigy Version</span>
+            </h1>
+            <p class="text-slate-300 max-w-xl text-sm sm:text-base">
+                Travel back in time to experience classic wizard duels, retro town maps, and historical Prodigy Math Game builds.
             </p>
-        </section>
+        </div>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-
-            <!-- CLIENT 1: Build 1-10-0 -->
-            <div class="spellbook-card bg-[#0e0c29]/95 border-4 border-yellow-500/60 rounded-3xl p-6 shadow-xl hover:shadow-glow-gold flex flex-col justify-between relative overflow-hidden group" onmouseenter="playHoverSound()">
-                <!-- Elemental overlay background glow -->
-                <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-yellow-500/5 rounded-full group-hover:scale-125 transition-transform duration-500"></div>
-                <div class="absolute top-4 right-4 text-xs font-black text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">v1.10.0</div>
-
-                <div>
-                    <!-- Visual icon area -->
-                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center border-2 border-yellow-400 shadow-md mb-6 transform group-hover:rotate-6 transition-transform">
-                        <i class="fa-solid fa-hourglass-start text-slate-950 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-fantasy font-black text-white tracking-wide mb-2 group-hover:text-yellow-400 transition-colors">Ancient Legacy</h3>
-                    <p class="text-xs text-yellow-300/80 mb-4 font-semibold tracking-wider">Circa 2014-2015 Era</p>
-                    <p class="text-sm text-slate-300 leading-relaxed mb-6">
-                        Return to the absolute dawn of the Academy. Features primitive interfaces, classic battle menus, and original pixel sprites.
-                    </p>
-                </div>
-
-                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-10-0/" 
-                   target="_blank" 
-                   onclick="playLaunchTrigger(event, this.href)"
-                   class="launch-btn w-full py-3 px-4 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-slate-950 font-black rounded-xl text-center text-sm shadow-lg border-b-4 border-amber-800 transition-all flex items-center justify-center gap-2">
-                    <span>LAUNCH PORTAL</span>
-                    <i class="fa-solid fa-play"></i>
-                </a>
+        <div class="w-full max-w-4xl mb-8 bg-slate-900/60 p-4 rounded-2xl border border-slate-800 backdrop-blur-md flex flex-col sm:flex-row items-center gap-4 justify-between">
+            <!-- Search Bar -->
+            <div class="relative w-full sm:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" onkeyup="filterVersions()" placeholder="Search version (e.g. 1.9.0)..." 
+                       class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400 transition-colors">
             </div>
 
-            <!-- CLIENT 2: Build 1-11-0 Vanilla -->
-            <div class="spellbook-card bg-[#0e0c29]/95 border-4 border-emerald-500/60 rounded-3xl p-6 shadow-xl hover:shadow-glow-emerald flex flex-col justify-between relative overflow-hidden group" onmouseenter="playHoverSound()">
-                <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-emerald-500/5 rounded-full group-hover:scale-125 transition-transform duration-500"></div>
-                <div class="absolute top-4 right-4 text-xs font-black text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">v1.11.0</div>
-
-                <div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center border-2 border-emerald-400 shadow-md mb-6 transform group-hover:-rotate-6 transition-transform">
-                        <i class="fa-solid fa-compass text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-fantasy font-black text-white tracking-wide mb-2 group-hover:text-emerald-400 transition-colors">Vanilla Classic</h3>
-                    <p class="text-xs text-emerald-300/80 mb-4 font-semibold tracking-wider">Circa 2016-2017 Era</p>
-                    <p class="text-sm text-slate-300 leading-relaxed mb-6">
-                        The definitive vanilla adventure. Standard quest files, authentic battle parameters, and pure nostalgic progression structures.
-                    </p>
-                </div>
-
-                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-11-0%20vanilla/" 
-                   target="_blank" 
-                   onclick="playLaunchTrigger(event, this.href)"
-                   class="launch-btn w-full py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black rounded-xl text-center text-sm shadow-lg border-b-4 border-emerald-800 transition-all flex items-center justify-center gap-2">
-                    <span>LAUNCH PORTAL</span>
-                    <i class="fa-solid fa-play"></i>
-                </a>
+            <!-- Filter Buttons -->
+            <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+                <button onclick="setCategory('all')" id="btn-all" class="category-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-500 text-slate-950 transition-all">All Versions</button>
+                <button onclick="setCategory('1.x')" id="btn-1.x" class="category-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">1.x Era</button>
+                <button onclick="setCategory('classic')" id="btn-classic" class="category-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all">Classic Battles</button>
             </div>
+        </div>
 
-            <!-- CLIENT 3: Mods Vault -->
-            <div class="spellbook-card bg-[#0e0c29]/95 border-4 border-purple-500/60 rounded-3xl p-6 shadow-xl hover:shadow-glow-purple flex flex-col justify-between relative overflow-hidden group" onmouseenter="playHoverSound()">
-                <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-purple-500/5 rounded-full group-hover:scale-125 transition-transform duration-500"></div>
-                <div class="absolute top-4 right-4 text-xs font-black text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Custom Mod</div>
-
-                <div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center border-2 border-purple-400 shadow-md mb-6 transform group-hover:rotate-12 transition-transform">
-                        <i class="fa-solid fa-wand-magic-sparkles text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-fantasy font-black text-white tracking-wide mb-2 group-hover:text-purple-400 transition-colors">Alchemical Hacks</h3>
-                    <p class="text-xs text-purple-300/80 mb-4 font-semibold tracking-wider">Modded Sandbox</p>
-                    <p class="text-sm text-slate-300 leading-relaxed mb-6">
-                        Experiment with unlimited sandbox capabilities! Gain max levels, instant elements, legendary wands, and custom client parameters.
-                    </p>
-                </div>
-
-                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/mods/" 
-                   target="_blank" 
-                   onclick="playLaunchTrigger(event, this.href)"
-                   class="launch-btn w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-black rounded-xl text-center text-sm shadow-lg border-b-4 border-purple-800 transition-all flex items-center justify-center gap-2">
-                    <span>LAUNCH PORTAL</span>
-                    <i class="fa-solid fa-play"></i>
-                </a>
-            </div>
-
-            <!-- CLIENT 4: Definitive Edition -->
-            <div class="spellbook-card bg-[#0e0c29]/95 border-4 border-cyan-500/60 rounded-3xl p-6 shadow-xl hover:shadow-glow-cyan flex flex-col justify-between relative overflow-hidden group" onmouseenter="playHoverSound()">
-                <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-cyan-500/5 rounded-full group-hover:scale-125 transition-transform duration-500"></div>
-                <div class="absolute top-4 right-4 text-xs font-black text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Hybrid Core</div>
-
-                <div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center border-2 border-cyan-400 shadow-md mb-6 transform group-hover:-rotate-12 transition-transform">
-                        <i class="fa-solid fa-crown text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-fantasy font-black text-white tracking-wide mb-2 group-hover:text-cyan-400 transition-colors">Definitive Portal</h3>
-                    <p class="text-xs text-cyan-300/80 mb-4 font-semibold tracking-wider">Remastered Select</p>
-                    <p class="text-sm text-slate-300 leading-relaxed mb-6">
-                        The ultimate hybrid experience. Loads streamlined selection panels, dynamic community fixes, and ideal aspect-ratio scaling layouts.
-                    </p>
-                </div>
-
-                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/choose/" 
-                   target="_blank" 
-                   onclick="playLaunchTrigger(event, this.href)"
-                   class="launch-btn w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black rounded-xl text-center text-sm shadow-lg border-b-4 border-cyan-800 transition-all flex items-center justify-center gap-2">
-                    <span>LAUNCH PORTAL</span>
-                    <i class="fa-solid fa-play"></i>
-                </a>
-            </div>
-
-        </section>
-
-        <!-- INTERACTIVE RETRO TELEPORTATION PORTAL VISUAL -->
-        <section class="bg-slate-900/90 border-4 border-amber-600/60 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-3 left-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-amber-500/30 text-xs font-bold text-yellow-400 pointer-events-none z-10 flex items-center gap-2">
-                <span id="terminalOrb" class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-ping"></span>
-                <span id="terminalStatus">TELEPORT COORDINATES LOCKED</span>
-            </div>
+        <div id="versionGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 w-full max-w-4xl mb-12">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-4">
-                <div class="text-left flex flex-col gap-4">
-                    <h4 class="text-2xl font-fantasy font-black text-white">How to Launch Successfully</h4>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        To preserve progression archives, these launchers route through custom client assets. If you notice a white screen loading block, ensure that mixed content or legacy flash simulation shields (if applicable) are configured for these community directories.
-                    </p>
-                    <div class="bg-indigo-950/40 p-4 rounded-2xl border border-indigo-500/20 text-xs text-indigo-300 flex items-start gap-3">
-                        <i class="fa-solid fa-circle-exclamation text-amber-500 text-lg mt-0.5"></i>
-                        <div>
-                            <strong class="text-white">Archivist's Tip:</strong> Use a keyboard that features functional numeric keys to configure retro math responses rapidly within the battles!
-                        </div>
-                    </div>
-                </div>
+            <!-- VERSION 1.9.0 -->
+            <div class="version-card magic-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group" data-version="1.9.0" data-category="1.x classic">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
                 
-                <!-- Quick visual console -->
-                <div class="bg-slate-950/95 rounded-2xl border-2 border-indigo-500/30 p-5 font-mono text-left text-xs text-yellow-500/90 flex flex-col gap-2 shadow-inner-dark relative min-h-[150px]">
-                    <div class="flex justify-between items-center border-b border-indigo-900/60 pb-2 mb-1">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Console Link Log</span>
-                        <div class="flex gap-1">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <div>
+                    <!-- Header Badges -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 font-bold text-xs">
+                                Build v1.9.0
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-medium">
+                                Classic Era
+                            </span>
                         </div>
+                        <span class="text-xs text-slate-400 font-mono"><i class="fa-regular fa-calendar-alt mr-1"></i>2015 Build</span>
                     </div>
-                    <div id="consoleText">
-                        <span class="text-slate-500">[System]</span> Awaiting timeline sequence launch...<br>
-                        <span class="text-slate-500">[System]</span> Local wizard configuration parsed.<br>
-                        <span class="text-slate-500">[System]</span> Magic synthesis oscillators initialized.
-                    </div>
+
+                    <!-- Card Title & Description -->
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2 flex items-center gap-2">
+                        <span>Prodigy 1.9.0</span>
+                        <i class="fa-solid fa-wand-sparkles text-amber-400 text-lg"></i>
+                    </h2>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Experience classic battle mechanics with the original 2D spell animations, early wizard academy maps, and iconic legacy pet sprites.
+                    </p>
+                </div>
+
+                <!-- Card Actions -->
+                <div class="flex items-center gap-3 pt-4 border-t border-slate-800">
+                    <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-9-0/" 
+                       onclick="playMagicSound()"
+                       class="flex-1 py-3 px-4 rounded-xl font-display font-bold text-slate-950 shine-button shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm group-hover:shadow-amber-500/40">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        <span>Play v1.9.0</span>
+                    </a>
+                    <button onclick="openModal('v190')" class="px-3.5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold transition-colors" title="View Version Details">
+                        <i class="fa-solid fa-circle-info text-base"></i>
+                    </button>
                 </div>
             </div>
-        </section>
 
-        <!-- Relative path navigation back to index.html -->
-        <div class="flex justify-center">
-            <a href="../../index.html" class="inline-flex items-center gap-2 py-3 px-6 bg-slate-900 border-2 border-amber-600/60 hover:border-amber-400/80 rounded-2xl text-amber-300 hover:text-yellow-200 text-sm font-bold transition-all shadow-md active:scale-95">
-                <i class="fa-solid fa-circle-chevron-left"></i>
-                Return to Master Gateway Home
-            </a>
+            <!-- VERSION 1.10.0 -->
+            <div class="version-card magic-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group" data-version="1.10.0" data-category="1.x classic">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
+                
+                <div>
+                    <!-- Header Badges -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-cyan-400/20 border border-cyan-400/40 text-cyan-300 font-bold text-xs">
+                                Build v1.10.0
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-medium">
+                                Fan Favorite
+                            </span>
+                        </div>
+                        <span class="text-xs text-slate-400 font-mono"><i class="fa-regular fa-calendar-alt mr-1"></i>2015 Era</span>
+                    </div>
+
+                    <!-- Card Title & Description -->
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2 flex items-center gap-2">
+                        <span>Prodigy 1.10.0</span>
+                        <i class="fa-solid fa-dragon text-cyan-400 text-lg"></i>
+                    </h2>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Features expanded elemental academies, refined spell casting balances, improved monster encounters, and enhanced battle soundscapes.
+                    </p>
+                </div>
+
+                <!-- Card Actions -->
+                <div class="flex items-center gap-3 pt-4 border-t border-slate-800">
+                    <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-9-0/" 
+                       onclick="playMagicSound()"
+                       class="flex-1 py-3 px-4 rounded-xl font-display font-bold text-slate-950 shine-button shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm group-hover:shadow-amber-500/40">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        <span>Play v1.9.0</span>
+                    </a>
+                    <button onclick="openModal('v190')" class="px-3.5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold transition-colors" title="View Version Details">
+                        <i class="fa-solid fa-circle-info text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- VERSION 1.10.0 -->
+            <div class="version-card magic-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group" data-version="1.10.0" data-category="1.x classic">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
+                
+                <div>
+                    <!-- Header Badges -->
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-cyan-400/20 border border-cyan-400/40 text-cyan-300 font-bold text-xs">
+                                Build v1.10.0
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-medium">
+                                Fan Favorite
+                            </span>
+                        </div>
+                        <span class="text-xs text-slate-400 font-mono"><i class="fa-regular fa-calendar-alt mr-1"></i>2015 Era</span>
+                    </div>
+
+                    <!-- Card Title & Description -->
+                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2 flex items-center gap-2">
+                        <span>Prodigy 1.10.0</span>
+                        <i class="fa-solid fa-dragon text-cyan-400 text-lg"></i>
+                    </h2>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Features expanded elemental academies, refined spell casting balances, improved monster encounters, and enhanced battle soundscapes.
+                    </p>
+
+                    <!-- Key Features List -->
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i>
+                            <span>Expanded Firefly Forest & Shiverchill Mountains</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i>
+                            <span>Refined Elemental Spells & Relic Mechanics</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i class="fa-solid fa-check text-cyan-400"></i>
+                            <span>Enhanced Battle Interface & Classic Music</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Actions -->
+                <div class="flex items-center gap-3 pt-4 border-t border-slate-800">
+                    <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-10-0" 
+                       onclick="playMagicSound()"
+                       class="flex-1 py-3 px-4 rounded-xl font-display font-bold text-white bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-blue-500 shadow-lg shadow-cyan-900/30 flex items-center justify-center gap-2 text-sm border border-cyan-400/30 group-hover:shadow-cyan-600/50">
+                        <i class="fa-solid fa-play text-xs"></i>
+                        <span>Play v1.10.0</span>
+                    </a>
+                    <button onclick="openModal('v1100')" class="px-3.5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-semibold transition-colors" title="View Version Details">
+                        <i class="fa-solid fa-circle-info text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ARCHIVE INFO BOX -->
+            <div class="md:col-span-2 bg-purple-950/40 border border-purple-500/20 rounded-2xl p-6 text-center backdrop-blur-md">
+                <i class="fa-solid fa-scroll text-2xl text-purple-400 mb-2"></i>
+                <h3 class="font-display font-bold text-lg text-slate-100 mb-1">More Builds Arriving from the Vault</h3>
+                <p class="text-xs text-slate-400 max-w-lg mx-auto">
+                    Our archivist team is preserving and restoring additional historical Prodigy releases. Stay tuned or check out the Insider Program for developer previews!
+                </p>
+            </div>
+
+        </div>
+
+        <!-- No Results Fallback -->
+        <div id="noResults" class="hidden text-center py-12">
+            <i class="fa-solid fa-ghost text-4xl text-slate-600 mb-3"></i>
+            <p class="text-slate-400 text-base font-semibold">No version builds match your search.</p>
+            <p class="text-slate-500 text-xs mt-1">Try searching "1.9.0" or "1.10.0".</p>
         </div>
 
     </main>
 
-    <!-- MAIN FOOTER -->
-    <footer class="w-full bg-slate-950 border-t-4 border-amber-600 py-6 px-4 text-center relative z-10">
-        <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
-            <div class="flex items-center gap-2 text-yellow-500 text-lg font-fantasy">
-                <i class="fa-solid fa-scroll"></i>
-                <span>OLD PRODIGY SELECTION CHAMBER</span>
+    <div id="versionModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div id="modalContent">
+                <!-- Modal content injected dynamically -->
             </div>
-            <p class="text-[11px] text-slate-500 leading-relaxed max-w-xl">
-                This selector routes to individual git directories preserving legacy resources. All rights are reserved to Prodigy Education Inc. Custom modifications are for sandbox fan gameplay preservation tests.
-            </p>
+        </div>
+    </div>
+
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-slate-800/60">
+        <div>
+            &copy; Old Prodigy Project. Created by <span class="text-slate-400 font-semibold">ultrathyme42</span>.
+        </div>
+        <div class="flex items-center gap-6">
+            <a href="https://ultrathyme42.github.io/OldProdigy/" class="hover:text-amber-400 transition-colors">Main Hub</a>
+            <a href="https://ultrathyme42.github.io/Website-Tester/" class="hover:text-purple-400 transition-colors">Insider Program</a>
+            <a href="https://ultrathyme42.github.io/prodidows/" class="hover:text-cyan-400 transition-colors">Prodidows</a>
         </div>
     </footer>
 
-    <!-- WEB AUDIO FX & MAGIC CANVAS ANIMATION SCRIPT -->
     <script>
-        // --- Web Audio Synthesizer Engine ---
+        // --- Web Audio API Synth Sound Effects ---
+        let audioEnabled = false;
         let audioCtx = null;
 
-        function initAudioContext() {
+        function toggleAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
-        }
+            
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
 
-        // Play gentle retro synth blip when hovering selectors
-        function playHoverSound() {
-            try {
-                initAudioContext();
-                if (!audioCtx) return;
+            audioEnabled = !audioEnabled;
+            const soundIcon = document.getElementById('soundIcon');
+            const soundText = document.getElementById('soundText');
 
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime); // A4 Note
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1); // Ramp up
-
-                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.1);
-            } catch (err) {
-                console.warn('Audio contextual block prevented instant play', err);
+            if (audioEnabled) {
+                soundIcon.className = 'fa-solid fa-volume-high text-amber-400';
+                soundText.innerText = 'Sound: On';
+                playMagicSound();
+            } else {
+                soundIcon.className = 'fa-solid fa-volume-xmark text-slate-400';
+                soundText.innerText = 'Sound: Off';
             }
         }
 
-        // Play a massive ascending magical portal arpeggio upon click
-        function playLaunchSound() {
+        function playMagicSound() {
+            if (!audioEnabled || !audioCtx) return;
+
             try {
-                initAudioContext();
-                if (!audioCtx) return;
-
-                const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 1046.50]; // Ascending magic C major chord
                 const now = audioCtx.currentTime;
-
-                notes.forEach((freq, idx) => {
+                const freqs = [440, 554.37, 659.25, 880]; // A4, C#5, E5, A5
+                
+                freqs.forEach((freq, index) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + index * 0.07);
+
+                    gain.gain.setValueAtTime(0.08, now + index * 0.07);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.07 + 0.25);
 
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
 
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, now + (idx * 0.08));
-
-                    gain.gain.setValueAtTime(0.08, now + (idx * 0.08));
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + (idx * 0.08) + 0.4);
-
-                    osc.start(now + (idx * 0.08));
-                    osc.stop(now + (idx * 0.08) + 0.4);
+                    osc.start(now + index * 0.07);
+                    osc.stop(now + index * 0.07 + 0.25);
                 });
-            } catch (err) {
-                console.warn(err);
+            } catch (e) {
+                console.error("Audio playback error:", e);
             }
         }
 
-        // Launch trigger controller with console feedback and animation delays
-        function playLaunchTrigger(event, url) {
-            event.preventDefault();
-            playLaunchSound();
-            
-            // Generate colorful portal particles on screen
-            const consoleBox = document.getElementById('consoleText');
-            const terminalStatus = document.getElementById('terminalStatus');
-            const terminalOrb = document.getElementById('terminalOrb');
-            
-            terminalOrb.className = "w-2.5 h-2.5 rounded-full bg-red-500 animate-ping";
-            terminalStatus.innerText = "CHRONO PORTAL STABILIZING... CHARGING ENGINE";
-            
-            consoleBox.innerHTML += `<br><span class="text-emerald-400">[Chrono]</span> Triggering dimensional jump route:<br><span class="text-indigo-300">${url}</span>`;
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+        // --- Search and Category Filtering Logic ---
+        let currentCategory = 'all';
 
-            // Delayed redirect to simulate teleport jump
-            setTimeout(() => {
-                window.open(url, '_blank');
-                terminalOrb.className = "w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse";
-                terminalStatus.innerText = "TELEPORT COORDINATES LOCKED";
-            }, 800);
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-amber-500', 'text-slate-950');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            const activeBtn = document.getElementById('btn-' + cat);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+                activeBtn.classList.add('active', 'bg-amber-500', 'text-slate-950');
+            }
+
+            filterVersions();
         }
 
-        // --- Wizard State & Elements customizer ---
-        const wizardNameInput = document.getElementById('wizardName');
-        const dynamicWizName = document.getElementById('dynamicWizName');
+        function filterVersions() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.version-card');
+            let visibleCount = 0;
 
-        // Load profile settings from local storage
-        if(localStorage.getItem('oldProdigyWizName')) {
-            wizardNameInput.value = localStorage.getItem('oldProdigyWizName');
-            dynamicWizName.innerText = localStorage.getItem('oldProdigyWizName');
-        }
+            cards.forEach(card => {
+                const ver = card.getAttribute('data-version').toLowerCase();
+                const categories = card.getAttribute('data-category').toLowerCase();
+                
+                const matchesSearch = ver.includes(query);
+                const matchesCat = currentCategory === 'all' || categories.includes(currentCategory);
 
-        wizardNameInput.addEventListener('input', () => {
-            const val = wizardNameInput.value.trim() || 'Guest Wizard';
-            dynamicWizName.innerText = val;
-            localStorage.setItem('oldProdigyWizName', val);
-        });
-
-        // Set Wizard Elemental Theme and update style highlights
-        function setWizardElement(elem) {
-            localStorage.setItem('oldProdigyElement', elem);
-            
-            // Define active elemental choices
-            const elements = ['fire', 'water', 'star', 'shadow'];
-            elements.forEach(e => {
-                const btn = document.getElementById(`elem-${e}`);
-                if (btn) {
-                    if (e === elem) {
-                        btn.classList.add('ring-2', 'ring-yellow-400', 'scale-110');
-                    } else {
-                        btn.classList.remove('ring-2', 'ring-yellow-400', 'scale-110');
-                    }
+                if (matchesSearch && matchesCat) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
 
-            currentElement = elem;
-            
-            // Console response feedback 
-            const consoleBox = document.getElementById('consoleText');
-            if (consoleBox) {
-                const emojiMap = { fire: '🔥', water: '💧', star: '⭐', shadow: '🔮' };
-                consoleBox.innerHTML += `<br><span class="text-indigo-400">[System]</span> Elemental matrix realigned to ${emojiMap[elem].toUpperCase()} ${elem.toUpperCase()}!`;
-                consoleBox.scrollTop = consoleBox.scrollHeight;
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
             }
         }
 
-        // --- BACKGROUND RUNE CANVAS PARTICLES ---
-        const canvas = document.getElementById('bgRuneCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let currentElement = localStorage.getItem('oldProdigyElement') || 'star';
-
-        // Particle colors matched with element settings
-        const elementColors = {
-            fire: '#ef4444',
-            water: '#3b82f6',
-            star: '#eab308',
-            shadow: '#a855f7'
+        // --- Modal Inspector Logic ---
+        const modalData = {
+            v100: {
+                title: "Prodigy Build v1.0.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-0-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v100: {
+                title: "Prodigy Build v1.2.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-2-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v130: {
+                title: "Prodigy Build v1.3.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-3-0/",
+                summary: "Mocked up from 1.10.0"
+            }, 
+            v131: {
+                title: "Prodigy Build v1.3.1",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-3-1/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v140: {
+                title: "Prodigy Build v1.4.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-4-0/",
+                summary: "Mocked up from 1.10.0"
+            }, 
+            v146: {
+                title: "Prodigy Build v1.4.6",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-4-6/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v150: {
+                title: "Prodigy Build v1.5.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-5-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v150: {
+                title: "Prodigy Build v1.6.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-6-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v170: {
+                title: "Prodigy Build v1.7.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-7-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v1713: {
+                title: "Prodigy Build v1.7.1.3",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-7-1-3/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v180: {
+                title: "Prodigy Build v1.8.0",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-8-0/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v181: {
+                title: "Prodigy Build v1.8.1",
+                badge: "Mocked version",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-8-1/",
+                summary: "Mocked up from 1.10.0"
+            },
+            v190: {
+                title: "Prodigy Build v1.9.0",
+                badge: "Classic 2015 Era",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-9-0/",
+                summary: "Prodigy version 1.9.0 represents the early golden era of wizardry in Lamplight Town. Features nostalgic UI, legacy math challenges, and classic 2D elemental particle casting."
+            },
+            v1100: {
+                title: "Prodigy Build v1.10.0",
+                badge: "Fan Favorite Era",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-10-0",
+                summary: "Prodigy version 1.10.0 refined the battle mechanics and expanded the world zones. Experience classic firefly forest adventures with smooth spell casting performance."
+            },
+            v1110: {
+                title: "Prodigy Build v1.11.0",
+                badge: "Info not available",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-11-0/",
+                summary: "no info"
+            },
+            v1120: {
+                title: "Prodigy Build v1.12.0",
+                badge: "Info not available",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-12-0/",
+                summary: "no info"
+            },
+            v1122: {
+                title: "Prodigy Build v1.12.2",
+                badge: "Info not available",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-12-2/",
+                summary: "no info"
+            },
+            v1130: {
+                title: "Prodigy Build v1.13.0",
+                badge: "Info not available",
+                url: "https://ultrathyme42.github.io/OldProdigy/oldprodigy/1-13-0/",
+                summary: "no info"
+            } 
         };
 
-        const magicalRunes = ['🜁', '🜂', '🜃', '🜄', '🜆', '🝰', '🝱', '✦', '✧', '✴', '☼'];
+        function openModal(key) {
+            const data = modalData[key];
+            if (!data) return;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const content = `
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-bold text-xs">
+                        ${data.badge}
+                    </span>
+                </div>
+                <h3 class="font-display font-bold text-2xl text-slate-100 mb-3">${data.title}</h3>
+                <p class="text-slate-300 text-sm mb-6 leading-relaxed">${data.summary}</p>
+
+                <a href="${data.url}" onclick="playMagicSound()" class="w-full py-3 rounded-xl font-display font-bold text-slate-950 shine-button flex items-center justify-center gap-2 text-sm shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-rocket"></i> Launch ${data.title}
+                </a>
+            `;
+
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('versionModal').classList.remove('hidden');
         }
 
-        class RuneParticle {
+        function closeModal() {
+            document.getElementById('versionModal').classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('versionModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // --- Magical Particle Background Canvas ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class Particle {
             constructor() {
                 this.reset();
-                this.y = Math.random() * canvas.height; // Spread initially across vertical screen space
             }
 
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 50;
-                this.size = Math.random() * 12 + 8;
-                this.speed = Math.random() * 0.8 + 0.3;
-                this.alpha = Math.random() * 0.5 + 0.1;
-                this.rune = magicalRunes[Math.floor(Math.random() * magicalRunes.length)];
-                this.angle = Math.random() * 360;
-                this.spinSpeed = (Math.random() - 0.5) * 0.5;
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = -Math.random() * 0.6 - 0.2;
+                this.opacity = Math.random() * 0.7 + 0.2;
+                this.color = Math.random() > 0.5 ? '#fbbf24' : '#38bdf8';
             }
 
             update() {
-                this.y -= this.speed;
-                this.angle += this.spinSpeed;
-                this.color = elementColors[currentElement] || '#eab308';
-                
-                if (this.y < -30) {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.y < 0 || this.x < 0 || this.x > width) {
                     this.reset();
+                    this.y = height;
                 }
             }
 
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate((this.angle * Math.PI) / 180);
-                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.font = `${this.size}px serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(this.rune, 0, 0);
-                ctx.restore();
+                ctx.globalAlpha = this.opacity;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
             }
         }
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(50, Math.floor(window.innerWidth / 25));
-            for (let i = 0; i < count; i++) {
-                particles.push(new RuneParticle());
-            }
+        const particles = [];
+        const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
         }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+
             particles.forEach(p => {
                 p.update();
                 p.draw();
             });
-            requestAnimationFrame(animate);
+
+            requestAnimationFrame(animateParticles);
         }
 
-        // Boot and configuration triggers
-        window.addEventListener('load', () => {
-            resizeCanvas();
-            initParticles();
-            animate();
-            setWizardElement(currentElement);
-        });
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
-        });
+        window.onload = function() {
+            animateParticles();
+        };
     </script>
 </body>
 </html>
