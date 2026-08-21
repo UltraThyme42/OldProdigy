@@ -112,6 +112,13 @@ WalkSpeed gives you a Walk Speed feature in settings where you can set your walk
 Some mods might work or not work in some versions.
 
 Currently, these are the versions that support modpacks:
+ - 1-0-0
+ - 1-2-0
+ - 1-3-0
+ - 1-3-1
+ - 1-4-0
+ - 1-6-0
+ - 1-8-0
  - 1-9-0 
  - 1-10-0 
  - prodigyde
@@ -199,8 +206,9 @@ Currently, these are the versions that support modpacks:
 - 1.52.0 (Bugfixes)
 - 1.60.0 (Changed the Login Background + Shipwreck Shore and Starlight Festival update)
 - 1.70.0 (Changed the Login Background + Dark Tower, Titan, and Winterfest update)
+- 1.75.0 (Starlight Festival update with new stuff in the starlight festival shop + new starlight festival currency)
 - 1.80.0 (Changed the Login Background + Battle team update)
-- 1.90.0 Changed the Login Background + (Springfest update)
+- 1.90.0 Changed the Login Background + (Springfest update + No more pressing a arrow on red to catch a pet, instead you answer a math question or in this 1-90-0 modification, it catches instantly since theres no math + in tutorial you battle the pippet)
 - 2.6.0 (Changed the Login Background + Massive battle revision) Problems: Your questdata resets when you load your save from earlier than this version.
 - 2.20.0 (Academy and a bunch of fonts updated) 
 - 2.30.0 (Changed the Login Background + Winterfest update) 
@@ -227,6 +235,11 @@ Lets scratch the surface shall we?
 - First Name changing possibility - pde2015 - oldprodigyde, pde1500, & pde1700
 - Middle Name & Last Name changing possiblity - pde2015 - oldprodigyde, pde1500, & pde1700
 - 2014-2016's Map - prodigyde - oldprodigyde, pde1500 - pde1.51.0, & pde1700
+
+## Other notes
+
+Versions older than 1.10.0 aren't the real accurate versions since they're lost media for now, they are just modded 1.10.0 versions.
+  
   
 Yep, you heard that right, that's just scratching the surface. There are lots of versions to choose from and modpacks are supported for some of them, so you can probably imagine what months of hard work can do to something like that. 
 
