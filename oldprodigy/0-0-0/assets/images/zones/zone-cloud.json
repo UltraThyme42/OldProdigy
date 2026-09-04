@@ -1,0 +1,21 @@
+{"frames": {
+
+"bg":
+{
+	"frame": {"x":2,"y":2,"w":1280,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1280,"h":720},
+	"sourceSize": {"w":1280,"h":720},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://web.archive.org/web/20200331182642/http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "zone-cloud.png",
+	"format": "RGBA8888",
+	"size": {"w":1284,"h":724},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9fec693acf2c431d14729cb41b232930:dee474938c34620f814de265c11c4fab:9c32942b2a3ba94cf1b21906788fede3$"
+}
+}
