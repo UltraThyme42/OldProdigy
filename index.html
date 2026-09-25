@@ -3,388 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Prodigy - Classic Gateway</title>
-    <!-- Tailwind CSS -->
+    <title>Old Prodigy Archive</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'],
-                        magic: ['Cinzel', 'serif']
-                    },
-                    colors: {
-                        prodigy: {
-                            blue: '#1e40af',
-                            gold: '#fbbf24',
-                            purple: '#6b21a8',
-                            dark: '#0f172a',
-                            glow: '#38bdf8'
-                        }
-                    },
-                    animation: {
-                        'float': 'float 4s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 2s infinite',
-                        'shimmer': 'shimmer 2.5s infinite linear'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 15px rgba(251, 191, 36, 0.4), 0 0 30px rgba(56, 189, 248, 0.2)' },
-                            '50%': { boxShadow: '0 0 25px rgba(251, 191, 36, 0.8), 0 0 50px rgba(56, 189, 248, 0.5)' },
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-200% 0' },
-                            '100%': { backgroundPosition: '200% 0' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Google Fonts for Retro Fantasy Vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@600;700;900&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body {
-            background: radial-gradient(circle at center, #1b1335 0%, #0a0612 100%);
-            color: #f1f5f9;
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at center, #1b143f 0%, #0d0a21 100%);
+            color: #f3f4f6;
             min-height: 100vh;
             overflow-x: hidden;
         }
-        
-        .magic-card {
-            background: rgba(30, 27, 58, 0.7);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .font-title {
+            font-family: 'Cinzel', serif;
         }
 
-        .magic-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            border-color: rgba(251, 191, 36, 0.6);
-            box-shadow: 0 20px 40px -15px rgba(107, 33, 168, 0.5);
+        .font-retro {
+            font-family: 'Press Start 2P', monospace;
         }
 
-        .shine-button {
-            background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
-            background-size: 200% 100%;
-            transition: all 0.3s ease;
+        /* Starry background twinkling stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 230px 180px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 300px 250px, #ffffff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 350px 350px;
+            opacity: 0.6;
+            animation: twinkle 6s infinite linear;
         }
 
-        .shine-button:hover {
-            background-position: 100% 0;
-            filter: brightness(1.1);
+        @keyframes twinkle {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-350px); }
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Floating wizard orb or mystical glow effect */
+        .magical-glow {
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.3), inset 0 0 15px rgba(59, 130, 246, 0.4);
         }
-        ::-webkit-scrollbar-track {
-            background: #0a0612;
+
+        /* Retro button styling with gold border & fantasy look */
+        .retro-btn {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+            border: 3px solid #fbbf24;
+            box-shadow: 0 6px 0 #b45309, 0 10px 20px rgba(0,0,0,0.5);
+            transition: all 0.1s ease-in-out;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #3b0764;
-            border-radius: 4px;
+
+        .retro-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 9px 0 #b45309, 0 15px 25px rgba(251, 191, 36, 0.3);
+            background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6b21a8;
+
+        .retro-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #b45309, 0 5px 10px rgba(0,0,0,0.5);
         }
     </style>
 </head>
-<body class="flex flex-col justify-between min-h-screen relative font-sans">
+<body class="flex flex-col min-h-screen relative selection:bg-amber-500 selection:text-white">
 
-    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+    <div class="stars"></div>
 
-    <!-- Header / Navigation -->
-    <header class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-amber-400 p-0.5 flex items-center justify-center shadow-lg shadow-purple-900/40">
-                <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                    <i class="fa-solid font-magic text-2xl text-amber-400 fa-hat-wizard"></i>
-                </div>
-            </div>
-            <div>
-                <span class="font-display font-bold text-2xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500">OLD PRODIGY</span>
-                <span class="block text-xs text-purple-300 font-semibold tracking-widest uppercase">Archive Hub</span>
-            </div>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <button id="soundToggle" onclick="toggleAudio()" class="px-3 py-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs text-slate-300 flex items-center gap-2 transition-all">
-                <i id="soundIcon" class="fa-solid fa-volume-xmark text-amber-400"></i>
-                <span id="soundText">Sound: Off</span>
-            </button>
-            <a href="https://github.com/ultrathyme42" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-amber-400 text-xl transition-colors">
-                <i class="fa-brands fa-github"></i>
-            </a>
+    <header class="w-full py-6 px-4 text-center z-10">
+        <div class="inline-block bg-blue-950/60 border border-amber-400/40 px-6 py-2 rounded-full backdrop-blur-md shadow-lg">
+            <span class="font-retro text-xs md:text-sm text-amber-300 tracking-wider">✨ CLASSIC ARCHIVE EDITION ✨</span>
         </div>
     </header>
 
-    <!-- Main Content Hero Section -->
-    <main class="relative z-10 flex-1 max-w-6xl mx-auto px-6 py-8 flex flex-col items-center justify-center text-center">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 z-10 max-w-4xl mx-auto text-center">
         
-        <!-- Welcome Badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-900/50 border border-purple-500/30 text-purple-200 text-sm font-medium mb-6 animate-float">
-            <i class="fa-solid fa-sparkles text-amber-400"></i>
-            <span>Relive the Classic Wizard Battles</span>
-        </div>
-
-        <!-- Main Title -->
-        <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
-            Welcome to <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-500 drop-shadow-md">Old Prodigy</span>
-        </h1>
-        
-        <p class="text-slate-300 max-w-2xl text-base sm:text-lg mb-12 font-normal leading-relaxed">
-            Your primary gateway to legacy Prodigy Math Game builds, developer insider testing tools, and nostalgic retro environments. Choose your destination below:
-        </p>
-
-        <!-- Core Button Navigation Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-12">
+        <!-- Magical Card Container -->
+        <div class="bg-slate-900/80 border-4 border-amber-500/80 rounded-3xl p-8 md:p-12 magical-glow backdrop-blur-xl w-full max-w-2xl relative overflow-hidden">
             
-            <!-- Card 1: Version Select -->
-            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
-                
-                <div class="my-4">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-book-bookmark"></i>
-                    </div>
-                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Version Select</h2>
-                    <p class="text-slate-400 text-sm">Choose from a curated collection of legacy Old Prodigy game versions.</p>
-                </div>
+            <!-- Corner decorative gems -->
+            <div class="absolute top-3 left-3 w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner"></div>
+            <div class="absolute top-3 right-3 w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner"></div>
+            <div class="absolute bottom-3 left-3 w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner"></div>
+            <div class="absolute bottom-3 right-3 w-4 h-4 rounded-full bg-amber-400 border border-amber-200 shadow-inner"></div>
 
-                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" 
-                   onclick="playMagicSound()"
-                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-slate-950 shine-button shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group-hover:shadow-amber-500/40">
-                    <span>Launch Select</span>
-                    <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
-                </a>
+            <!-- Title & Subtitle -->
+            <div class="mb-10">
+                <h1 class="font-title text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)] tracking-wide mb-4">
+                    Old Prodigy Archive
+                </h1>
+                <p class="text-blue-200 text-base md:text-lg font-medium max-w-lg mx-auto leading-relaxed">
+                    Step back in time through the mystical realms of classic Prodigy Math Game history. Choose your portal below!
+                </p>
             </div>
 
-            <!-- Card 2: Old Prodigy Insider Program -->
-            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
+            <div class="flex flex-col gap-5 w-full max-w-md mx-auto">
                 
-                <div class="my-4">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-flask-vial"></i>
-                    </div>
-                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Insider Program</h2>
-                    <p class="text-slate-400 text-sm">Test new features, access experimental tools, and preview web builds.</p>
-                </div>
-
+                <!-- Button 1: Prodigy Inside -->
                 <a href="https://ultrathyme42.github.io/Website-Tester/" 
-                   onclick="playMagicSound()"
-                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 shadow-lg shadow-purple-900/30 flex items-center justify-center gap-2 border border-purple-400/30 group-hover:shadow-purple-700/50">
-                    <span>Join / Test Web</span>
-                    <i class="fa-solid fa-vial-circle-check text-sm group-hover:rotate-12 transition-transform"></i>
+                   class="retro-btn group flex items-center justify-between px-6 py-4 rounded-2xl text-white font-bold text-lg md:text-xl tracking-wide">
+                    <span class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-125 transition-transform">🔮</span>
+                        <span>Prodigy Inside</span>
+                    </span>
+                    <span class="text-amber-300 font-retro text-xs bg-blue-950/80 px-3 py-1.5 rounded-lg border border-amber-400/40 group-hover:bg-amber-400 group-hover:text-blue-950 transition-colors">
+                        ENTER &rarr;
+                    </span>
                 </a>
-            </div>
 
-            <!-- Card 3: Prodidows -->
-            <div class="magic-card rounded-2xl p-6 flex flex-col justify-between items-center text-center relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
-                
-                <div class="my-4">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-desktop"></i>
-                    </div>
-                    <h2 class="font-display font-bold text-2xl text-slate-100 mb-2">Prodidows</h2>
-                    <p class="text-slate-400 text-sm">Explore Prodidows - the nostalgic wizard-themed web desktop environment.</p>
-                </div>
+                <!-- Button 2: Version List -->
+                <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" 
+                   class="retro-btn group flex items-center justify-between px-6 py-4 rounded-2xl text-white font-bold text-lg md:text-xl tracking-wide">
+                    <span class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-125 transition-transform">📜</span>
+                        <span>Version List</span>
+                    </span>
+                    <span class="text-amber-300 font-retro text-xs bg-blue-950/80 px-3 py-1.5 rounded-lg border border-amber-400/40 group-hover:bg-amber-400 group-hover:text-blue-950 transition-colors">
+                        SELECT &rarr;
+                    </span>
+                </a>
 
+                <!-- Button 3: Prodidows -->
                 <a href="https://ultrathyme42.github.io/prodidows/" 
-                   onclick="playMagicSound()"
-                   class="w-full mt-4 py-3.5 px-6 rounded-xl font-display font-bold text-white bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-blue-500 shadow-lg shadow-cyan-900/30 flex items-center justify-center gap-2 border border-cyan-400/30 group-hover:shadow-cyan-600/50">
-                    <span>Open Prodidows</span>
-                    <i class="fa-solid fa-window-maximize text-sm group-hover:scale-110 transition-transform"></i>
+                   class="retro-btn group flex items-center justify-between px-6 py-4 rounded-2xl text-white font-bold text-lg md:text-xl tracking-wide">
+                    <span class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-125 transition-transform">💻</span>
+                        <span>Prodidows</span>
+                    </span>
+                    <span class="text-amber-300 font-retro text-xs bg-blue-950/80 px-3 py-1.5 rounded-lg border border-amber-400/40 group-hover:bg-amber-400 group-hover:text-blue-950 transition-colors">
+                        BOOT &rarr;
+                    </span>
                 </a>
+
             </div>
 
-        </div>
-
-        <!-- Features Showcase Grid -->
-        <div class="w-full max-w-5xl bg-slate-900/50 rounded-2xl p-6 sm:p-8 border border-slate-800 backdrop-blur-md text-left">
-            <h3 class="font-display font-bold text-xl text-amber-300 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
-                About the Old Prodigy Ecosystem
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-slate-300">
-                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="text-amber-400 font-bold mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-clock-rotate-left"></i> Classic Builds
-                    </div>
-                    Revisit old battle UI, classic elemental spells, pets, and original game mechanics.
-                </div>
-                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="text-purple-400 font-bold mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-microchip"></i> Experimental Tools
-                    </div>
-                    Test upcoming modifications and web utilities through the Insider Program.
-                </div>
-                <div class="p-4 rounded-xl bg-slate-950/40 border border-slate-800/80">
-                    <div class="text-cyan-400 font-bold mb-1 flex items-center gap-2">
-                        <i class="fa-solid fa-laptop-code"></i> Prodidows OS
-                    </div>
-                    Experience a unique operating system interface built specifically for Prodigy fans.
-                </div>
-            </div>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 w-full max-w-7xl mx-auto px-6 py-6 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-slate-800/60 mt-8">
-        <div>
-            &copy; Old Prodigy Project. Created by <span class="text-slate-400 font-semibold">ultrathyme42</span>.
-        </div>
-        <div class="flex items-center gap-6">
-            <a href="https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/" class="hover:text-amber-400 transition-colors">Version Select</a>
-            <a href="https://ultrathyme42.github.io/Website-Tester/" class="hover:text-purple-400 transition-colors">Insider Program</a>
-            <a href="https://ultrathyme42.github.io/prodidows/" class="hover:text-cyan-400 transition-colors">Prodidows</a>
+    <footer class="w-full py-6 px-4 text-center z-10 text-slate-400 text-xs md:text-sm">
+        <div class="max-w-xl mx-auto border-t border-slate-800 pt-4">
+            <p class="font-medium text-blue-300/80">
+                ✨ Fan archive homepage dedicated to preserving classic Prodigy Math Game memories. Not officially affiliated with Prodigy Education. ✨
+            </p>
         </div>
     </footer>
 
-    <!-- Interactive JavaScript Engine -->
     <script>
-        // --- Web Audio API Synth Sound Effects ---
-        let audioEnabled = false;
-        let audioCtx = null;
-
-        function toggleAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            audioEnabled = !audioEnabled;
-            const soundIcon = document.getElementById('soundIcon');
-            const soundText = document.getElementById('soundText');
-
-            if (audioEnabled) {
-                soundIcon.className = 'fa-solid fa-volume-high text-amber-400';
-                soundText.innerText = 'Sound: On';
-                playMagicSound();
-            } else {
-                soundIcon.className = 'fa-solid fa-volume-xmark text-slate-400';
-                soundText.innerText = 'Sound: Off';
-            }
-        }
-
-        function playMagicSound() {
-            if (!audioEnabled || !audioCtx) return;
-
-            try {
-                const now = audioCtx.currentTime;
-                
-                // Arpeggio frequencies for magical spell sound
-                const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-                
-                freqs.forEach((freq, index) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, now + index * 0.08);
-
-                    gain.gain.setValueAtTime(0.1, now + index * 0.08);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + index * 0.08 + 0.3);
-
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-
-                    osc.start(now + index * 0.08);
-                    osc.stop(now + index * 0.08 + 0.3);
-                });
-            } catch (e) {
-                console.error("Audio playback error:", e);
-            }
-        }
-
-        // --- Magical Particle Background Canvas ---
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Old Prodigy Archive loaded successfully.");
         });
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = -Math.random() * 0.6 - 0.2; // Slowly float up
-                this.opacity = Math.random() * 0.7 + 0.2;
-                this.color = Math.random() > 0.5 ? '#fbbf24' : '#a855f7'; // Gold or Purple
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.y < 0 || this.x < 0 || this.x > width) {
-                    this.reset();
-                    this.y = height;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.opacity;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                ctx.globalAlpha = 1.0;
-            }
-        }
-
-        const particles = [];
-        const particleCount = Math.min(60, Math.floor(window.innerWidth / 20));
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            requestAnimationFrame(animateParticles);
-        }
-
-        window.onload = function() {
-            animateParticles();
-        };
     </script>
+
 </body>
 </html>
