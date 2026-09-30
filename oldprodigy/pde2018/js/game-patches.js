@@ -214,7 +214,7 @@ class ModObj {
 							i.prodigy.player.parentalLink = e.metadata.parentalLink
 						}
 					} else {
-						i.prodigy.player.isMember = !1, // No membership by default
+						i.prodigy.player.isMember = !0, // Membership by default
 						i.prodigy.player.data.startDate = (new Date).getTime(), // Fix mail crash
 						i.prodigy.player.registerDate = new Date(i.prodigy.player.data.startDate)
 					};
