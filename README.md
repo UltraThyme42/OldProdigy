@@ -1,3 +1,6 @@
+# Contents
+- [Credits](#credits)
+- [Old Prodigy info](#Old-Prodigy)
 # Credits
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
