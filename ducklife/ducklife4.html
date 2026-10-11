@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Life Unity WebGL Player</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        /* Custom styling for the simulated Unity canvas area */
+        #unity-container {
+            width: 960px;
+            max-width: 100%;
+            height: 600px;
+            background: #1e293b;
+            position: relative;
+            margin: 0 auto;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <header class="bg-slate-900 border-b border-slate-800 p-4 text-center">
+        <h1 class="text-2xl font-black text-amber-400 tracking-wider flex items-center justify-center gap-2">
+            <span>🦆</span> Duck Life Unity WebGL Launcher
+        </h1>
+        <p class="text-xs text-slate-400 mt-1">Embed Unity WebGL builds directly into a single responsive HTML page.</p>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        
+        <div id="unity-container" class="flex flex-col items-center justify-center border border-slate-700">
+            <!-- Actual Unity WebGL Canvas element required by Unity builds -->
+            <canvas id="unity-canvas" class="w-full h-full object-cover" width="960" height="600"></canvas>
+            
+            <!-- Loading Overlay -->
+            <div id="unity-loading-bar" class="absolute inset-0 bg-slate-900/90 flex flex-col items-center justify-center p-6 transition-opacity duration-300">
+                <div class="text-amber-400 text-5xl mb-4 animate-bounce">🦆</div>
+                <h2 id="loading-title" class="text-lg font-bold mb-2">Preparing Duck Life 4 Unity Environment...</h2>
+                <div class="w-64 bg-slate-800 rounded-full h-4 overflow-hidden p-0.5 border border-slate-700">
+                    <div id="unity-progress-bar-full" class="bg-amber-400 h-full rounded-full transition-all duration-200" style="width: 0%;"></div>
+                </div>
+                <p id="loading-status" class="text-xs text-slate-400 mt-3">Ready to load your Unity build...</p>
+            </div>
+            
+            <!-- Fullscreen Toggle Button Overlay -->
+            <div class="absolute bottom-4 right-4 z-10">
+                <button id="unity-fullscreen-button" onclick="toggleFullScreen()" class="bg-slate-800/80 hover:bg-slate-700 text-white p-2 rounded-lg backdrop-blur-sm border border-slate-600 transition shadow-lg text-sm flex items-center gap-1">
+                    <span>📺</span> Fullscreen
+                </button>
+            </div>
+        </div>
+
+        <!-- Instructions Card with local loader info -->
+        <div class="max-w-3xl w-full mt-8 bg-slate-800/50 border border-slate-700/60 rounded-xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold text-amber-300 mb-3 flex items-center gap-2">
+                <span>💡</span> Using your local <code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">UnityLoader.js</code>:
+            </h3>
+            <ol class="list-decimal list-inside space-y-2 text-sm text-slate-300">
+                <li>Place your <code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">UnityLoader.js</code> (or modern <code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">.loader.js</code>) in the same directory or adjust the script tag path below.</li>
+                <li>Ensure your build folders (<code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">Build/</code>, <code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">TemplateData/</code>) are correctly placed relative to this HTML file.</li>
+                <li>The configuration object below is already set up to call <code class="bg-slate-900 px-1.5 py-0.5 rounded text-amber-200">createUnityInstance()</code>.</li>
+            </ol>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800 p-4 text-center text-xs text-slate-500">
+        Duck Life Unity WebGL Template &bull; Built for High Performance Browsers
+    </footer>
+
+    <!-- INCLUDE YOUR LOCAL UNITY LOADER SCRIPT HERE -->
+    <!-- Replace "UnityLoader.js" with the exact path or name of your file -->
+    <script src="UnityLoader.js" onerror="handleLoaderMissing()"></script>
+
+    <script>
+        let unityInstanceRef = null;
+
+        window.addEventListener("load", function () {
+            // Check if user has included the actual UnityLoader script
+            if (typeof createUnityInstance === "undefined" && typeof UnityLoader === "undefined") {
+                console.warn("UnityLoader.js not found or not loaded.");
+                handleLoaderMissing();
+                return;
+            }
+
+            // Real Unity WebGL Initialization Configuration
+            var container = document.querySelector("#unity-container");
+            var canvas = document.querySelector("#unity-canvas");
+            var progressBar = document.querySelector("#unity-progress-bar-full");
+            var loadingBar = document.querySelector("#unity-loading-bar");
+            var loadingStatus = document.querySelector("#loading-status");
+
+            // Typical path for Unity 2020+ builds: Update build paths as per your export
+            var buildUrl = "Build";
+            var config = {
+                dataUrl: buildUrl + "/DuckLife4.data",
+                frameworkUrl: buildUrl + "/DuckLife4.framework.js",
+                codeUrl: buildUrl + "/DuckLife4.wasm",
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "DefaultCompany",
+                productName: "Duck Life 4",
+                productVersion: "1.0",
+            };
+
+            // If using older UnityLoader API style:
+            if (typeof UnityLoader !== "undefined") {
+                loadingStatus.textContent = "Loading Unity 2017/2018 instance...";
+                // UnityLoader.instantiate("unity-canvas", buildUrl + "/DuckLife4.json", {onProgress: ...});
+            } else if (typeof createUnityInstance === "function") {
+                // Modern Unity WebGL Build Engine (Unity 2020+)
+                createUnityInstance(canvas, config, function (progress) {
+                    var percent = Math.round(progress * 100);
+                    progressBar.style.width = percent + "%";
+                    loadingStatus.textContent = "Loading Duck Life 4 assets... " + percent + "%";
+                }).then(function (unityInstance) {
+                    unityInstanceRef = unityInstance;
+                    loadingBar.style.opacity = "0";
+                    setTimeout(() => { loadingBar.style.display = "none"; }, 300);
+                }).catch(function (message) {
+                    // Custom non-alert message handler
+                    showErrorMessage(message);
+                });
+            }
+        });
+
+        // Triggered if the <script src="UnityLoader.js"> fails to find the file or loader is missing
+        function handleLoaderMissing() {
+            var loadingStatus = document.querySelector("#loading-status");
+            loadingStatus.textContent = "UnityLoader.js not found or waiting for build files.";
+        }
+
+        // Custom error message display instead of alert()
+        function showErrorMessage(message) {
+            var loadingStatus = document.querySelector("#loading-status");
+            loadingStatus.innerHTML = `<span class="text-red-400 font-bold">Error loading Unity build:</span><br><span class="text-xs">${message}</span>`;
+            var progressBarContainer = document.querySelector("#unity-progress-bar-full").parentNode;
+            if (progressBarContainer) progressBarContainer.style.display = "none";
+        }
+
+        // Fullscreen toggle logic
+        function toggleFullScreen() {
+            var container = document.querySelector("#unity-container");
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    console.error("Error attempting to enable fullscreen:", err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
