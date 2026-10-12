@@ -1,6 +1,9 @@
 # Contents
 - [Credits](#credits)
 - [Old Prodigy info](#Old-Prodigy)
+- [Old Prodigy Versions](#Versions)
+
+  https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/versionlistjs.html for js list
 # Credits
 Game restorers: Daboss7173 https://github.com/Daboss7173, UltraThyme42, Craftersshaft https://github.com/craftersshaft/, etc
 
@@ -151,7 +154,7 @@ Currently, these are the versions that support modpacks:
  - 1-30-R (Prodigy Reborn 1.0 without Plumber's Cap?!)
  - Some Prodidows versions
 
-## List of Versions:
+## Versions:
 - 1.0.0 (Map Update + Grew the game to make it take up the entire page + Hearts show up during battles instead of the bar + Problem: Removed the ability to take care of your pets + Bypassed opening Treasure Chests after winning battles + Updated the ui, menus, etc + Instead of going to a zone to just do battles, you can click on the NPC and then click on the yes button to do battles. + Another issue: Removed Multiplayer stuff + Updated the Character Creation Zone) You can apply whatever was missing on this version as modpacks for it.
 - 1.2.0 (Skywatch + Font changes)
 - 1.3.0 (Dark Tower)
