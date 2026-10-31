@@ -1,6 +1,7 @@
 # Contents
 - [Credits](#credits)
 - [Old Prodigy info](#Old-Prodigy)
+- [Disclaimers](#Disclaimers) 
 - [Old Prodigy Versions](#Versions)
 
   https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/versionlistjs.html for js list
