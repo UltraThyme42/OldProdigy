@@ -1,8 +1,13 @@
 # Contents
 - [Credits](#credits)
 - [Old Prodigy info](#Old-Prodigy)
-- [Disclaimers](#Disclaimers) 
 - [Old Prodigy Versions](#Versions)
+- [Disclaimers](#Disclaimers)
+- [How to play](#How-to-play)
+- [Modpacks](#Modpacks)
+- [Prodigy Versions](#Versions:)
+- [About PDE](#Prodigy-Definitive-Edition)
+- [Other notes](#Other-notes)
 
   https://ultrathyme42.github.io/OldProdigy/oldprodigy/select/versionlistjs.html for js list
 # Credits
