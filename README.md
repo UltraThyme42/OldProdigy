@@ -5,7 +5,7 @@
 - [Disclaimers](#Disclaimers)
 - [How to play](#How-to-play)
 - [Modpacks](#Modpacks)
-- [Prodigy Versions](#Versions:)
+- [Prodigy Versions](#Versions)
 - [About PDE](#Prodigy-Definitive-Edition)
 - [Other notes](#Other-notes)
 
