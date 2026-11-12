@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Prodigy 1.30.0</title>
+    <title>Prodigy Rewritten 1.30.0</title>
     <meta charset="UTF-8" />
     <meta name="description" content="The legendary math game Prodigy is now legendary again, and no longer a math game!"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -312,10 +312,47 @@
     </div>
 
     <div id="membership-flow"></div>
+
+    <!-- Legal bar + age gate (login screen only; toggled by js/legal-bar.js) -->
+    <div id="legal-bar" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:2px;z-index:1000;padding:2px 14px;border-radius:10px;background:rgba(10,8,20,.62);white-space:nowrap;font:12px/1.6 'Ubuntu',sans-serif;color:rgba(255,255,255,.9);text-shadow:0 1px 2px #000;box-sizing:border-box;">
+        <a href="terms.html" target="_blank" rel="noopener" style="color:#f8b84d;text-decoration:none;">Terms of Service</a><span style="opacity:.55"> &middot; </span><a href="privacy.html" target="_blank" rel="noopener" style="color:#f8b84d;text-decoration:none;">Privacy Policy</a><span style="opacity:.55"> &middot; </span><a href="licenses.html" target="_blank" rel="noopener" style="color:#f8b84d;text-decoration:none;">Open Source Licenses</a>
+    </div>
+    <div id="age-gate" style="display:none;position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:1000;padding:5px 16px;border-radius:10px;background:rgba(10,8,20,.78);white-space:nowrap;font:13px/1.8 'Ubuntu',sans-serif;color:#fff;text-shadow:0 1px 2px #000;box-sizing:border-box;">
+        <input type="checkbox" id="agree13" style="vertical-align:middle;margin-right:8px;width:16px;height:16px;accent-color:#f8981d;cursor:pointer;">
+        <label for="agree13" style="cursor:pointer;">I am 13 or older and agree to the <a href="terms.html" target="_blank" rel="noopener" style="color:#f8b84d;text-decoration:none;">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener" style="color:#f8b84d;text-decoration:none;">Privacy Policy</a>.</label>
+    </div>
+    <script>
+        // Show the legal bar + 13+ checkbox only on the login/online screens, never during gameplay.
+        setInterval(function () {
+            var onLogin = false, online = false;
+            try {
+                var g = window.Phaser && Phaser.GAMES && Phaser.GAMES[0];
+                onLogin = !!(g && g.state.current === 'Login');
+                if (onLogin) {
+                    for (var k in g.state.states) {
+                        var s = g.state.states[k];
+                        if (s && s.homeBox) { online = !!(s.loginBox && s.loginBox.visible); break; }
+                    }
+                }
+            } catch (e) { }
+            var lb = document.getElementById('legal-bar'), ag = document.getElementById('age-gate');
+            if (lb) lb.style.display = onLogin ? 'block' : 'none';
+            if (ag) ag.style.display = (onLogin && online) ? 'block' : 'none';
+        }, 400);
+    </script>
     <script src="./js/phaser.min.js"></script>
+    <!-- QI stub: the battle code calls the retail math-question widget; this
+         answers it instantly so attacks don't abort mid-battle. -->
+    <script src="./js/qi-stub.js"></script>
     <script src="./js/game.min.js"></script>
     <script src="./js/easystar-0.2.0.min.js"></script>
     <script src="./js/mod-handler.js"></script>
+    <script src="./js/socket.io-1.3.5.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script src="./js/firebase-config.js"></script>
+    <script src="./js/firebase-core.js"></script>
     <script type="text/javascript">
         var prodigyWeb = {};
         prodigyWeb.country = undefined;
