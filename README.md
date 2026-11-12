@@ -25,6 +25,8 @@ Mod Makers: Daboss7173, Slappygig/Toonigy, UltraThyme42, etc
 
 Yandere Ai Girlfriend (Eddie) maker: Anthropic
 
+The space outlaws - Modded 1-30-0/Classidgy
+
 Song Makers: Jamie Christopherson and Matthew Pablo
 Song Editors: Prodigy Education a.k.a Prodigy Game
 Font Makers: Prodigy Education and more
