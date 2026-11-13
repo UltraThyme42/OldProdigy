@@ -446,6 +446,26 @@ FirebaseCore._lastMember = null;
 
 // Forget what we last wrote. Call on every user change (sign-in, sign-out,
 // account deletion) so one account's cache can never suppress another's writes.
+// Fix: arena matchmaking used playerA.id as the opponent id unconditionally, so
+// the player who happened to be "playerA" fought themselves. Use the other
+// player's id as the opponent.
+(function () {
+	if (typeof Prodigy === "undefined" || !Prodigy.Container || !Prodigy.Container.Arena) return;
+	Prodigy.Container.Arena.prototype.messageRecieved = function (e) {
+		console.log(e);
+		if (Util.isDefined(this.timer)) window.clearInterval(this.timer);
+		this.message.setText("Match found! Connecting now...");
+		this.game.prodigy.network.sendAnalytics("PVP", "found-match", "Events");
+		var t = function (g) { g.state.start("Arena"); };
+		var i = new Player;
+		var me = this.game.prodigy.player.userID;
+		var opponentId;
+		if (e.playerA.id !== me) { i.init(e.playerA.data); opponentId = e.playerA.id; }
+		else { i.init(e.playerB.data); opponentId = e.playerB.id; }
+		this.game.prodigy.pvp.start(opponentId, this.game.prodigy.player, i, t.bind(this, this.game), !0, "Arena");
+	};
+})();
+
 FirebaseCore.resetCloudDedupe = function () {
 	FirebaseCore._lastSaveSig = null;
 	FirebaseCore._lastPublicSig = null;
@@ -508,6 +528,7 @@ FirebaseCore.resetCloudDedupe = function () {
 			}
 			self.clearSearch();
 			try { self.input.setFocus(null); } catch (e) {}
+			self.game.prodigy.player.chatID = text;
 			self.game.prodigy.network.emitMessage({
 				action: "chat",
 				data: { userID: self.game.prodigy.player.userID, chatID: text }
@@ -666,6 +687,7 @@ FirebaseCore.refreshNetworkCredentials = function (game) {
 	var net = game && game.prodigy && game.prodigy.network;
 	if (!net || !net.api || !FirebaseCore.user) return;
 	net.api.userID = FirebaseCore.user.uid;
+	if (game && game.prodigy && game.prodigy.player) game.prodigy.player.userID = FirebaseCore.user.uid;
 	var apply = function (n) {
 		FirebaseCore.getFreshToken(function (err, token) {
 			if (token) n.api.uniqueKey = token;
