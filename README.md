@@ -37,7 +37,9 @@ Original Prodigy Makers: Rohan Mahimker/Alexander Peters
    
 # Old Prodigy
 
-Echo server: https://chat-echo.com/ultrathyme-studios
+Yapin Server: https://yapin.gg/invite/Kx9dNfrYtS
+
+Echo Server: https://chat-echo.com/ultrathyme-studios
 
 Discord Server: https://discord.gg/5GVRVhydXE
 
